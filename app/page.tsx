@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 const Page = () => {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gray-50">
-      <div className="absolute inset-0 " style={{ zIndex: 0 }}>
+      <div className="absolute inset-0 z-0 ">
         <Image
           src={background}
           alt="Background Image"
@@ -15,10 +15,7 @@ const Page = () => {
           priority
         />
       </div>
-      <div
-        className="absolute inset-0  bg-white opacity-60"
-        style={{ zIndex: 0 }}
-      ></div>
+      <div className="absolute inset-0  bg-white opacity-60 z-0"></div>
 
       <div className="flex flex-col h-screen items-center justify-center  z-10 md:px-10">
         <div className="flex items-center justify-center mx-4 p-8 mb-4">
