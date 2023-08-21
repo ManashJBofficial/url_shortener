@@ -2,7 +2,7 @@ import Image from "next/image";
 import background from "../public/gradient.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
+import { EnterIcon } from "@radix-ui/react-icons";
 const Page = () => {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gray-50">
@@ -34,7 +34,7 @@ const Page = () => {
             required
           />
           <Button type="submit" className="shadow-lg">
-            Submit
+            <EnterIcon className="h-4 w-4" />
           </Button>
         </div>
       </div>
