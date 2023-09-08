@@ -31,7 +31,8 @@
     ".next/types/**/*.ts",
     "./types",
     "next-env.d.ts",
-    "pages/api"
+    "pages/api",
+    "app/api/auth/s"
   ],
   "exclude": ["node_modules"]
 }
