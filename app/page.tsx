@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import Image from "next/image";
 import background from "../public/gradient.png";
 // import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
@@ -25,7 +25,6 @@ import {
   CardBody,
   CardFooter,
   Button,
-  Input,
 } from "@nextui-org/react";
 const Page = () => {
   const { toast } = useToast();
@@ -69,7 +68,6 @@ const Page = () => {
         />
       </div>
       <div className="absolute inset-0  bg-white opacity-60 z-0"></div>
-      <NavBar />
       <div className="flex flex-col h-screen items-center justify-center  z-10 md:px-10">
         <div className="flex items-center justify-center mx-4 p-8 mb-4">
           <h1 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-8 bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">
@@ -82,23 +80,14 @@ const Page = () => {
           className="flex flex-row w-full max-w-sm items-center justify-center space-x-2 px-5 py-10 sm:px-0 md:px-0 xl:px-0"
         >
           <Input
-            id="input_box"
+            type="url"
+            placeholder="Shorten your link"
+            className="shadow-lg border-black bg-slate-50"
             name="long_url"
             value={longUrl}
             onChange={(e) => setLongUrl(e.target.value)}
-            isClearable
-            radius="sm"
-            type="url"
-            variant="flat"
-            placeholder="Shorten your link"
-            onClear={() => setLongUrl("")}
-            className="max-w-xs"
-            startContent={
-              <Link1Icon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-            }
-            aria-describedby="long_url_description"
-            pattern=".*\S+.*" // Use regex pattern to check if input is not blank
-            title="Please enter a URL." // Custom error message
+            pattern="https://.*"
+            title="Please enter a valid URL starting with 'https://'"
             required
           />
           <Button
