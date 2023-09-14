@@ -1,23 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import Image from "next/image";
 import background from "../public/gradient.png";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+// import {
+//   Card,
+//   CardContent,
+//   CardDescription,
+//   CardFooter,
+//   CardHeader,
+//   CardTitle,
+// } from "@/components/ui/card";
+import { NavBar } from "./components/navBar";
+import { Link1Icon } from "@radix-ui/react-icons";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
+  CardBody,
+  CardFooter,
+  Button,
+} from "@nextui-org/react";
 const Page = () => {
   const { toast } = useToast();
   const [longUrl, setLongUrl] = useState("");
@@ -25,12 +33,16 @@ const Page = () => {
     try {
       event.preventDefault();
       // ("use server");
-      const response = await fetch("http://localhost:3000/api/shorten", {
+      if (longUrl.trim() === "") {
+        console.log("Long URL is blank. Please enter a URL.");
+        return;
+      }
+      const response = await fetch(`${process.env.BASE_URL}/api/shorten`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ longUrl }), // Pass the longUrl in the request body
+        body: JSON.stringify({ longUrl }),
       });
       console.log("response", response);
       if (response.status === 200 || response.status === 201) {
@@ -39,6 +51,8 @@ const Page = () => {
           description: "Successfully shortened link!",
         });
       }
+
+      console.log("longUrl", longUrl);
     } catch (error) {}
   };
 
@@ -54,7 +68,6 @@ const Page = () => {
         />
       </div>
       <div className="absolute inset-0  bg-white opacity-60 z-0"></div>
-
       <div className="flex flex-col h-screen items-center justify-center  z-10 md:px-10">
         <div className="flex items-center justify-center mx-4 p-8 mb-4">
           <h1 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-8 bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">
@@ -77,50 +90,25 @@ const Page = () => {
             title="Please enter a valid URL starting with 'https://'"
             required
           />
-          <Button type="submit" className="shadow-lg">
+          <Button
+            type="submit"
+            isIconOnly
+            radius="sm"
+            color="danger"
+            aria-label="Enter"
+            className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+          >
             <EnterIcon className="h-4 w-4" />
           </Button>
         </form>
         <Toaster />
         <div className="pt-2 w-72 sm:w-64 md:w-96 xl:w-96">
           <Card>
-            <CardHeader>
-              <div className="flex flex-row justify-between items-center">
-                <CardTitle className="text-indigo-700">
-                  shrt.com/bjyd45
-                </CardTitle>
-
-                <Button
-                  type="submit"
-                  className="shadow-md rounded-full bg-slate-200 hover:bg-sky-200"
-                >
-                  <CopyIcon className="h-3 w-3 text-black" />
-                </Button>
-              </div>
-
-              <CardDescription>https://reddit.com</CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
-
-        <div className="pt-2 w-72 sm:w-64 md:w-96 xl:w-96">
-          <Card>
-            <CardHeader>
-              <div className="flex flex-row justify-between items-center">
-                <CardTitle className="text-indigo-700">
-                  shrt.com/bjyd45
-                </CardTitle>
-
-                <Button
-                  type="submit"
-                  className="shadow-md rounded-full bg-slate-200 hover:bg-sky-200"
-                >
-                  <CopyIcon className="h-3 w-3 text-black" />
-                </Button>
-              </div>
-
-              <CardDescription>https://reddit.com</CardDescription>
-            </CardHeader>
+            <CardBody>
+              <p>
+                Make beautiful websites regardless of your design experience.
+              </p>
+            </CardBody>
           </Card>
         </div>
       </div>
