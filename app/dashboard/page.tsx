@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 
 const Dashboard = () => {
   const { data: session } = useSession();
+
   useEffect(() => {
     if (!session) {
       redirect("/login");
@@ -17,6 +18,7 @@ const Dashboard = () => {
     <>
       <div>
         <NavBar signIn={signIn} signOut={signOut} session={session} />
+        <h1>My Links</h1>
       </div>
     </>
   );

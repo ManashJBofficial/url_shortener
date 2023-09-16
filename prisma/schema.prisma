@@ -10,8 +10,17 @@ datasource db {
 model ShortenedURL {
   id         String   @id @default(uuid())
   long_url   String
-  short_code String   @unique
+  short_code String   @unique 
   created_at DateTime @default(now())
+}
+
+model ShortenedURLPrivate {
+  id         String   @id @default(uuid())
+  long_url   String
+  short_code String   @unique
+  userIdNo   String  
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [userIdNo], references: [id])
 }
 
 model User {
@@ -25,6 +34,7 @@ model User {
   // Define a one-to-many relationship with AuthProvider
   authProviders           AuthProvider[]
   EmailPasswordCredential EmailPasswordCredential[]
+  shortenedURLPrivates        ShortenedURLPrivate[]
 }
 
 model AuthProvider {
