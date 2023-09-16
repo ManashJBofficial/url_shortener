@@ -1,23 +1,15 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useState, useId } from "react";
 import Image from "next/image";
 import background from "../public/gradient.png";
-// import { Button } from "@/components/ui/button";
+
 import { Input } from "@/components/ui/input";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-// } from "@/components/ui/card";
-import { NavBar } from "./components/navBar";
+import NavBar from "./components/navBar";
 import { Link1Icon } from "@radix-ui/react-icons";
 import {
   Card,
@@ -26,9 +18,13 @@ import {
   CardFooter,
   Button,
 } from "@nextui-org/react";
+import { useSession, signIn, signOut } from "next-auth/react";
+
 const Page = () => {
   const { toast } = useToast();
   const [longUrl, setLongUrl] = useState("");
+  // const router = useRouter();
+  const { data: session } = useSession();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
@@ -68,6 +64,7 @@ const Page = () => {
         />
       </div>
       <div className="absolute inset-0  bg-white opacity-60 z-0"></div>
+      <NavBar signIn={signIn} signOut={signOut} session={session} />
       <div className="flex flex-col h-screen items-center justify-center  z-10 md:px-10">
         <div className="flex items-center justify-center mx-4 p-8 mb-4">
           <h1 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-8 bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">
