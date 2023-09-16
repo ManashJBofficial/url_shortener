@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import loginBG from "../../public/loginbg.jpg";
@@ -8,7 +8,9 @@ import { Card, CardBody, CardHeader, Input } from "@nextui-org/react";
 import { EnterIcon } from "@radix-ui/react-icons";
 import GoogleIcon from "../../public/google.svg";
 import GithubLight from "../../public/github-light.svg";
+import { useEffect } from "react";
 // import GithubDark from "../../public/github-dark.svg";
+import { redirect } from "next/navigation";
 
 const Login = () => {
   const session = useSession();
@@ -61,35 +63,8 @@ const Login = () => {
     );
   }
   if (session.status === "authenticated") {
-    console.log("session", session);
-    return (
-      <>
-        <div className="flex flex-col md:flex-row">
-          <Image
-            // className="hidden md:block lg:block md:w-7/12 h-screen bg-cover bg-center relative"
-            className="hidden md:block lg:block md:w-1/2 h-64 md:h-screen bg-cover bg-center relative opacity-60 md:opacity-100"
-            src={loginBG}
-            alt="background image"
-          />
-          <div className="md:w-5/12  p-8 flex flex-col items-center justify-center">
-            <Card className="w-96 p-4 md:p-8">
-              <CardBody>
-                <Button
-                  type="submit"
-                  className="w-full bg-github text-black hover:bg-opacity-80 hover:text-white"
-                  onClick={() => signOut()}
-                >
-                  Logout
-                </Button>
-              </CardBody>
-            </Card>
-          </div>
-        </div>
-      </>
-    );
+    redirect("/dashboard");
   }
-
-  console.log("session", session);
 };
 
 export default Login;
