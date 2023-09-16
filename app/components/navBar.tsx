@@ -14,7 +14,7 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface NavBarProps {
   signIn: () => void;
@@ -26,14 +26,17 @@ export default function NavBar({ signOut, session }: NavBarProps) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
     if (session) {
       setAvatar(session.user.image);
       setUserName(session.user.name);
       setUserEmail(session.user.email);
     }
+    console.log("pathname", pathname);
     return () => {};
-  }, [session]);
+  }, [session, pathname]);
+  const isDisabled = true;
   return (
     <>
       <Navbar isBordered>
@@ -43,32 +46,45 @@ export default function NavBar({ signOut, session }: NavBarProps) {
 
         <NavbarContent as="div" justify="end">
           <Dropdown placement="bottom-end">
-            <DropdownTrigger>
-              {session ? (
-                <Avatar
-                  id="avatar_id"
-                  isBordered
-                  as="button"
-                  className="transition-transform"
-                  color="secondary"
-                  name={userName}
-                  size="sm"
-                  src={avatar}
-                />
+            {session ? (
+              pathname === "/" ? (
+                <Button
+                  type="button"
+                  radius="full"
+                  color="primary"
+                  className=""
+                  onClick={() => router.push("/dashboard")}
+                >
+                  Dashboard
+                </Button>
               ) : (
-                <>
-                  <Button
-                    type="button"
-                    radius="full"
-                    color="primary"
-                    className=""
-                    onClick={() => router.push("/login")}
-                  >
-                    Login
-                  </Button>
-                </>
-              )}
-            </DropdownTrigger>
+                <DropdownTrigger>
+                  <Avatar
+                    id="avatar_id"
+                    isBordered
+                    as="button"
+                    className="transition-transform"
+                    color="secondary"
+                    name={userName}
+                    size="sm"
+                    src={avatar}
+                  />
+                </DropdownTrigger>
+              )
+            ) : (
+              <>
+                <Button
+                  type="button"
+                  radius="full"
+                  color="primary"
+                  className=""
+                  onClick={() => router.push("/login")}
+                >
+                  Login
+                </Button>
+              </>
+            )}
+
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
                 <p className="font-semibold">Signed in as</p>
