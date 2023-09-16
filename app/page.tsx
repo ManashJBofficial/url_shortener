@@ -4,7 +4,8 @@ import { useState, useId } from "react";
 import Image from "next/image";
 import background from "../public/gradient.png";
 
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
+import { Input } from "@nextui-org/react";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { useToast } from "@/components/ui/use-toast";
@@ -76,7 +77,7 @@ const Page = () => {
           onSubmit={handleSubmit}
           className="flex flex-row w-full max-w-sm items-center justify-center space-x-2 px-5 py-10 sm:px-0 md:px-0 xl:px-0"
         >
-          <Input
+          {/* <Input
             type="url"
             placeholder="Shorten your link"
             className="shadow-lg border-black bg-slate-50"
@@ -86,6 +87,22 @@ const Page = () => {
             pattern="https://.*"
             title="Please enter a valid URL starting with 'https://'"
             required
+          /> */}
+          <Input
+            isRequired
+            isClearable
+            id="input_id"
+            type="url"
+            name="long_url"
+            value={longUrl}
+            onChange={(e) => setLongUrl(e.target.value)}
+            placeholder="Shorten your link"
+            aria-describedby="text-input"
+            startContent={
+              <Link1Icon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+            }
+            onClear={() => setLongUrl("")}
+            radius="sm"
           />
           <Button
             type="submit"
