@@ -87,8 +87,8 @@ export default function NavBar({ signOut, session }: NavBarProps) {
 
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">{userEmail}</p>
+                <p className="font-semibold">{userName}</p>
+                <p className="font-normal text-gray-500">{userEmail}</p>
               </DropdownItem>
               <DropdownItem key="settings" textValue="">
                 My Settings
