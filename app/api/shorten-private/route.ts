@@ -6,12 +6,13 @@ export const POST = async (req: Request, res: Response) => {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
   }
 
-  const { longUrl } = await req.json();
+  const { longUrl, userIdNumber } = await req.json();
 
   try {
-    const createdUrl = await prisma.shortenedURL.create({
+    const createdUrl = await prisma.shortenedURLPrivate.create({
       data: {
         long_url: longUrl,
+        userIdNo: userIdNumber,
         short_code: generateRandomString(6),
       },
     });

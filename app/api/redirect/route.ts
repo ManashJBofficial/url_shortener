@@ -14,18 +14,29 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const urlEntry = await prisma.shortenedURL.findUnique({
       where: { short_code: shortcode as string },
     });
-
+    const urlEntryPrivate = await prisma.shortenedURLPrivate.findUnique({
+      where: { short_code: shortcode as string },
+    });
     console.log("urlEntry", urlEntry);
-    if (!urlEntry) {
+    console.log("urlEntryPrivate", urlEntryPrivate);
+
+    if (!urlEntry && !urlEntryPrivate) {
       return NextResponse.json(
         { error: "Shortcode not found" },
         { status: 404 }
       );
     }
 
-    // Redirect the user to the long URL
-    // return NextResponse.redirect(new URL( urlEntry.long_url))
-    return NextResponse.json({ url: urlEntry.long_url }, { status: 200 });
+    const responseData = urlEntry || urlEntryPrivate;
+
+    if (responseData) {
+      return NextResponse.json({ url: responseData.long_url }, { status: 200 });
+    } else {
+      return NextResponse.json(
+        { error: "Shortcode not found" },
+        { status: 404 }
+      );
+    }
   } catch (error) {
     console.error("Error fetching URL:", error);
     return NextResponse.json({ error: "Failed to fetch URL" }, { status: 500 });
