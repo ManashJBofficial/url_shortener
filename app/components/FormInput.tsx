@@ -4,6 +4,7 @@ import { Link1Icon } from "@radix-ui/react-icons";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { toast } from "@/components/ui/use-toast";
 import { useSession } from "next-auth/react";
+import { getAuthUser } from "../serverAction/getAuthUser";
 
 export const FormInput = () => {
   const { data: session } = useSession();
@@ -34,9 +35,15 @@ export const FormInput = () => {
           });
         }
       } else {
+        const email = session?.user?.email as string;
+        const image_url = session?.user?.image as string;
+        const regex = /^(https?:\/\/[^/]+\.com)/;
+        const image_url_prefix = image_url.match(regex)![0];
+        const currentUser = await getAuthUser(email, image_url_prefix);
+        const currentUserId = currentUser!.id;
         const data = {
           longUrl,
-          userIdNumber: "3cc1ba3c-c24a-4260-a9d0-604139d438c0",
+          userIdNumber: currentUserId,
         };
         const response = await fetch(
           `${process.env.BASE_URL}/api/shorten-private`,

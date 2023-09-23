@@ -34,7 +34,6 @@ const handler = NextAuth({
       const isExist = await prisma.user.findUnique({
         where: { user_id: id as string },
       });
-
       console.log("isExist=>", isExist);
 
       if (isExist !== null) {
