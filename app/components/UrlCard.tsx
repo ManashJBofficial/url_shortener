@@ -12,7 +12,7 @@ import {
 const UrlCard = () => {
   return (
     <>
-      <Card className="w-unit-80">
+      <Card className="w-full">
         <CardHeader className="flex gap-3">
           <Image
             alt="nextui logo"

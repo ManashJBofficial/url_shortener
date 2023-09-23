@@ -63,6 +63,7 @@ const Login = () => {
     );
   }
   if (session.status === "authenticated") {
+    console.log("authenticated", session);
     redirect("/dashboard");
   }
 };

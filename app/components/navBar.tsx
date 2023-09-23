@@ -33,10 +33,8 @@ export default function NavBar({ signOut, session }: NavBarProps) {
       setUserName(session.user.name);
       setUserEmail(session.user.email);
     }
-    console.log("pathname", pathname);
     return () => {};
   }, [session, pathname]);
-  const isDisabled = true;
   return (
     <>
       <Navbar isBordered>

@@ -15,12 +15,20 @@ import {
 import { EnterIcon } from "@radix-ui/react-icons";
 import { Divider } from "@nextui-org/react";
 import { Link1Icon } from "@radix-ui/react-icons";
+import { PlusIcon } from "@/lib/utils/PulseIcon";
+import { FormInput } from "./FormInput";
 
 export default function ModalForm() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
-      <Button onPress={onOpen} color="primary" radius="sm">
+      <Button
+        onPress={onOpen}
+        color="primary"
+        radius="sm"
+        endContent={<PlusIcon />}
+        id="modal-trigger-button"
+      >
         Create Link
       </Button>
       <Modal
@@ -37,9 +45,9 @@ export default function ModalForm() {
               <ModalHeader className="flex flex-col gap-1">
                 Create a new link
               </ModalHeader>
-              <Divider className="my-4" />
+              <Divider className="" />
               <ModalBody>
-                <Input
+                {/* <Input
                   isRequired
                   isClearable
                   id="input_id"
@@ -54,16 +62,19 @@ export default function ModalForm() {
                   }
                   // onClear={() => setLongUrl("")}
                   radius="sm"
-                />
+                /> */}
+                <div className="flex justify-center ">
+                  <FormInput />
+                </div>
               </ModalBody>
-              <ModalFooter>
+              {/* <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
                 <Button color="primary" onPress={onClose} radius="sm">
                   Create Link
                 </Button>
-              </ModalFooter>
+              </ModalFooter> */}
             </>
           )}
         </ModalContent>
