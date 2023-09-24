@@ -14,7 +14,6 @@ import { redirect } from "next/navigation";
 
 const Login = () => {
   const session = useSession();
-
   if (session.data === null) {
     return (
       <>

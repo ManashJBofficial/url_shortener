@@ -8,6 +8,8 @@ import ModalForm from "../components/ModalForm";
 import DataTable from "../components/DataTable";
 import { Toaster } from "@/components/ui/toaster";
 import { listSites } from "../serverAction/listSites";
+import Cookies from "js-cookie";
+import { getAuthUser } from "../serverAction/getAuthUser";
 
 interface Site {
   id: string;
@@ -19,22 +21,39 @@ interface Site {
 
 const Dashboard = () => {
   const { data: session } = useSession();
+
   const [siteList, setSiteList] = useState<Site[]>([]);
+  const [userId, setUserId] = useState("");
+
+  const storeUserId = useCallback(async () => {
+    const email = session?.user?.email as string;
+    const image_url = session?.user?.image as string;
+    const regex = /^(https?:\/\/[^/]+\.com)/;
+    const image_url_prefix = image_url?.match(regex)![0];
+    const currentUser = await getAuthUser(email, image_url_prefix);
+    const currentUserId = currentUser!.id;
+    console.log("currentUserId in dashboard", currentUserId);
+    setUserId(currentUserId);
+    return currentUserId;
+  }, [session]);
+
+  Cookies.set("user_id", userId, { expires: 7 });
 
   const listdata = useCallback(async () => {
-    const data = await listSites("3cc1ba3c-c24a-4260-a9d0-604139d438c0");
+    const data = await listSites(userId);
     setSiteList(data);
     return data;
-  }, []);
+  }, [userId]);
+
   useEffect(() => {
     if (!session) {
       redirect("/login");
     }
+    storeUserId();
     listdata();
-
     return () => {};
-  }, [session, listdata]);
-  console.log("siteList in state", siteList);
+  }, [session, listdata, storeUserId]);
+
   return (
     <>
       <div className="flex items-center justify-evenly ">

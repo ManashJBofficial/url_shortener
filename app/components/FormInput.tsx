@@ -4,12 +4,12 @@ import { Link1Icon } from "@radix-ui/react-icons";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { toast } from "@/components/ui/use-toast";
 import { useSession } from "next-auth/react";
-import { getAuthUser } from "../serverAction/getAuthUser";
+import Cookies from "js-cookie";
 
 export const FormInput = () => {
   const { data: session } = useSession();
-  console.log("session from formInput new", session);
-
+  const userId = Cookies.get("user_id");
+  console.log("cookie get", userId);
   const [longUrl, setLongUrl] = useState("");
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -35,15 +35,9 @@ export const FormInput = () => {
           });
         }
       } else {
-        const email = session?.user?.email as string;
-        const image_url = session?.user?.image as string;
-        const regex = /^(https?:\/\/[^/]+\.com)/;
-        const image_url_prefix = image_url.match(regex)![0];
-        const currentUser = await getAuthUser(email, image_url_prefix);
-        const currentUserId = currentUser!.id;
         const data = {
           longUrl,
-          userIdNumber: currentUserId,
+          userIdNumber: userId,
         };
         const response = await fetch(
           `${process.env.BASE_URL}/api/shorten-private`,

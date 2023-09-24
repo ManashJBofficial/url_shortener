@@ -16,7 +16,6 @@ const getAuthUser = async (email: string, imageUrlPrefix: string) => {
       ],
     },
   });
-  console.log("user", user);
   return user;
 };
 

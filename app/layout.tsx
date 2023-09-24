@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Provider from "./components/Provider";
 import { NextProvider } from "./components/NextUIProvider";
-
+// import StoreProvider from "../redux/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

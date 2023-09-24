@@ -17,7 +17,6 @@ import { FormInput } from "./components/FormInput";
 
 const Page = () => {
   const { data: session } = useSession();
-
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gray-50">
       <div className="absolute inset-0 z-0 ">

@@ -5,7 +5,7 @@ const listSites = async (authUserId: string) => {
   const siteList = await prisma.shortenedURLPrivate.findMany({
     where: { userIdNo: authUserId as string },
   });
-  console.log("siteList", siteList);
+  // console.log("siteList", siteList);
   return siteList;
 };
 
