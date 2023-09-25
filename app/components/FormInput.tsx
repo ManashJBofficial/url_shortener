@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/itemSlice";
 
 type FormInputProps = {
-  onSuccessSubmit: () => void;
+  onSuccessSubmit?: () => void;
 };
 
 export const FormInput: React.FC<FormInputProps> = ({ onSuccessSubmit }) => {
@@ -63,7 +63,7 @@ export const FormInput: React.FC<FormInputProps> = ({ onSuccessSubmit }) => {
         console.log("newItem", newItem.body);
         dispatch(addItem(newItem.body));
         //closes the modal
-        onSuccessSubmit();
+        onSuccessSubmit!();
         if (response.status === 200 || response.status === 201) {
           console.log("in here status 201");
           setLongUrl("");
