@@ -3,7 +3,7 @@
 import Image from "next/image";
 import background from "../public/gradient.png";
 import { Toaster } from "@/components/ui/toaster";
-import NavBar from "./components/navBar";
+import NavBar from "./components/NavBar";
 import { Link1Icon } from "@radix-ui/react-icons";
 import {
   Card,

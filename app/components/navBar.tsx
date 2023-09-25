@@ -37,90 +37,79 @@ export default function NavBar({ signOut, session }: NavBarProps) {
   }, [session, pathname]);
   return (
     <>
-      <Navbar isBordered>
-        <NavbarBrand>
-          <p className="font-bold text-inherit">SHORTY</p>
-        </NavbarBrand>
+      <div className="flex items-center justify-between h-20 w-full">
+        <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-bold text-inherit">SHORTY</p>
+            </div>
 
-        <NavbarContent as="div" justify="end">
-          <Dropdown placement="bottom-end">
-            {session ? (
-              pathname === "/" ? (
-                <Button
-                  type="button"
-                  radius="full"
-                  color="primary"
-                  className=""
-                  onClick={() => router.push("/dashboard")}
-                >
-                  Dashboard
-                </Button>
-              ) : (
-                <DropdownTrigger>
-                  <Avatar
-                    id="avatar_id"
-                    isBordered
-                    as="button"
-                    className="transition-transform"
-                    color="secondary"
-                    name={userName}
-                    size="sm"
-                    src={avatar}
-                  />
-                </DropdownTrigger>
-              )
-            ) : (
-              <>
-                <Button
-                  type="button"
-                  radius="full"
-                  color="primary"
-                  className=""
-                  onClick={() => router.push("/login")}
-                >
-                  Login
-                </Button>
-              </>
-            )}
+            <div>
+              <Dropdown placement="bottom-end">
+                {session ? (
+                  pathname === "/" ? (
+                    <Button
+                      type="button"
+                      radius="full"
+                      color="primary"
+                      className=""
+                      onClick={() => router.push("/dashboard")}
+                    >
+                      Dashboard
+                    </Button>
+                  ) : (
+                    <DropdownTrigger>
+                      <Avatar
+                        id="avatar_id"
+                        isBordered
+                        as="button"
+                        className="transition-transform"
+                        color="secondary"
+                        name={userName}
+                        size="sm"
+                        src={avatar}
+                      />
+                    </DropdownTrigger>
+                  )
+                ) : (
+                  <>
+                    <Button
+                      type="button"
+                      radius="full"
+                      color="primary"
+                      className=""
+                      onClick={() => router.push("/login")}
+                    >
+                      Login
+                    </Button>
+                  </>
+                )}
 
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">{userName}</p>
-                <p className="font-normal text-gray-500">{userEmail}</p>
-              </DropdownItem>
-              <DropdownItem key="settings" textValue="">
-                My Settings
-              </DropdownItem>
-              <DropdownItem key="team_settings" textValue="">
-                Team Settings
-              </DropdownItem>
-              <DropdownItem key="analytics" textValue="">
-                Analytics
-              </DropdownItem>
-              <DropdownItem key="system" textValue="">
-                System
-              </DropdownItem>
-              <DropdownItem key="configurations" textValue="">
-                Configurations
-              </DropdownItem>
-              <DropdownItem key="help_and_feedback" textValue="">
-                Help & Feedback
-              </DropdownItem>
-              <DropdownItem
-                key="logout"
-                textValue=""
-                color="danger"
-                onClick={() => {
-                  signOut();
-                  router.push("/");
-                }}
-              >
-                Log Out
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarContent>
-      </Navbar>
+                <DropdownMenu aria-label="Profile Actions" variant="flat">
+                  <DropdownItem key="profile" className="h-14 gap-2">
+                    <p className="font-semibold">{userName}</p>
+                    <p className="font-normal text-gray-500">{userEmail}</p>
+                  </DropdownItem>
+                  <DropdownItem key="settings" textValue="">
+                    My Settings
+                  </DropdownItem>
+                  <DropdownItem
+                    key="logout"
+                    textValue=""
+                    color="danger"
+                    onClick={() => {
+                      signOut();
+                      router.push("/login");
+                    }}
+                  >
+                    Log Out
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

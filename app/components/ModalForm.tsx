@@ -36,7 +36,7 @@ export default function ModalForm() {
         onOpenChange={onOpenChange}
         placement="top-center"
         backdrop="blur"
-        isDismissable={false}
+        // isDismissable={false}
         size="lg"
       >
         <ModalContent>

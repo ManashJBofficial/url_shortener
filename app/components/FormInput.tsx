@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input, Button } from "@nextui-org/react";
 import { Link1Icon } from "@radix-ui/react-icons";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { toast } from "@/components/ui/use-toast";
 import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/itemSlice";
 
 export const FormInput = () => {
+  const dispatch = useDispatch();
   const { data: session } = useSession();
   const userId = Cookies.get("user_id");
   console.log("cookie get", userId);
@@ -49,8 +52,15 @@ export const FormInput = () => {
             body: JSON.stringify(data),
           }
         );
-        console.log("response in else", response);
+        console.log("response", response);
+        const responseData = await response.json();
+        console.log("response in else", responseData);
+        const { created_at, ...newItem } = responseData;
+        console.log("newItem", newItem.body);
+        dispatch(addItem(newItem.body));
+
         if (response.status === 200 || response.status === 201) {
+          console.log("in here status 201");
           setLongUrl("");
           toast({
             description: "Successfully shortened link!",

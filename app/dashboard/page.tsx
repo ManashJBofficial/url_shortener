@@ -1,5 +1,5 @@
 "use client";
-import NavBar from "../components/navBar";
+import NavBar from "../components/NavBar";
 import React, { useCallback, useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -10,19 +10,26 @@ import { Toaster } from "@/components/ui/toaster";
 import { listSites } from "../serverAction/listSites";
 import Cookies from "js-cookie";
 import { getAuthUser } from "../serverAction/getAuthUser";
+import FilterCard from "../components/FilterCard";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { setItems } from "@/redux/itemSlice";
 
-interface Site {
-  id: string;
-  long_url: string;
-  short_code: string;
-  userIdNo: string;
-  created_at: Date;
-}
+// interface Site {
+//   id: string;
+//   long_url: string;
+//   short_code: string;
+//   userIdNo: string;
+//   created_at: Date;
+// }
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const items = useSelector((state: RootState) => state.items.list);
+  console.log("card list", items);
   const { data: session } = useSession();
 
-  const [siteList, setSiteList] = useState<Site[]>([]);
+  // const [siteList, setSiteList] = useState<Site[]>([]);
   const [userId, setUserId] = useState("");
 
   const storeUserId = useCallback(async () => {
@@ -37,13 +44,19 @@ const Dashboard = () => {
     return currentUserId;
   }, [session]);
 
-  Cookies.set("user_id", userId, { expires: 7 });
+  Cookies.set("user_id", userId, { expires: 30 });
 
   const listdata = useCallback(async () => {
     const data = await listSites(userId);
-    setSiteList(data);
+    const newData = data.map((item) => {
+      // Create a copy of the item without the created_at field
+      const { created_at, ...newItem } = item;
+      return newItem;
+    });
+    dispatch(setItems(newData));
+    // setSiteList(data);
     return data;
-  }, [userId]);
+  }, [userId, dispatch]);
 
   useEffect(() => {
     if (!session) {
@@ -72,12 +85,18 @@ const Dashboard = () => {
       <Toaster />
       <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20 py-12">
         <div className="flex  items-start justify-between">
-          <div className="div">cards 1</div>
           <div className="div">
-            {/* <UrlCard /> */}
-            {siteList?.map((e) => {
-              return <span key={e.id}>{e.long_url}</span>;
-            })}
+            <FilterCard />
+          </div>
+          <div className="">
+            {items &&
+              items.map((e, index) => {
+                return (
+                  <span key={`${e.id}-${index}`}>
+                    <UrlCard data={e} />
+                  </span>
+                );
+              })}
           </div>
         </div>
       </div>
