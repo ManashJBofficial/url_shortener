@@ -17,24 +17,15 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log("user", user);
-      console.log("account", account);
-      console.log("profile", profile);
       const name = profile?.name;
       const email = profile?.email;
       const provider = account?.provider;
       const id = user?.id;
       const image = user?.image;
-      console.log("name=>", name);
-      console.log("provider=>", provider);
-      console.log("email=>", email);
-      console.log("id=>", id);
-      console.log("image=>", image);
 
       const isExist = await prisma.user.findUnique({
         where: { user_id: id as string },
       });
-
       console.log("isExist=>", isExist);
 
       if (isExist !== null) {

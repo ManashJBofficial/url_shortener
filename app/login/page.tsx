@@ -14,7 +14,6 @@ import { redirect } from "next/navigation";
 
 const Login = () => {
   const session = useSession();
-
   if (session.data === null) {
     return (
       <>
@@ -63,6 +62,7 @@ const Login = () => {
     );
   }
   if (session.status === "authenticated") {
+    console.log("authenticated", session);
     redirect("/dashboard");
   }
 };

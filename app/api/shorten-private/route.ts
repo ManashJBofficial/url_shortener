@@ -16,11 +16,9 @@ export const POST = async (req: Request, res: Response) => {
         short_code: generateRandomString(6),
       },
     });
+
     console.log("createdUrl(6)", createdUrl);
-    return NextResponse.json(
-      { shortcode: createdUrl.short_code },
-      { status: 201 }
-    );
+    return NextResponse.json({ body: createdUrl }, { status: 201 });
   } catch (error) {
     console.error("Error creating URL:", error);
     return NextResponse.json(
@@ -39,4 +37,13 @@ function generateRandomString(length: number): string {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
+}
+function addItems(serializedItem: {
+  created_at: string;
+  id: string;
+  long_url: string;
+  short_code: string;
+  userIdNo: string;
+}): any {
+  throw new Error("Function not implemented.");
 }
