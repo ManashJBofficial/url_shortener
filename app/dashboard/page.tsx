@@ -5,7 +5,6 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import UrlCard from "../components/UrlCard";
 import ModalForm from "../components/ModalForm";
-import DataTable from "../components/DataTable";
 import { Toaster } from "@/components/ui/toaster";
 import { listSites } from "../serverAction/listSites";
 import Cookies from "js-cookie";
