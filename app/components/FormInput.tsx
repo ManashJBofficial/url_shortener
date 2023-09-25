@@ -61,11 +61,14 @@ export const FormInput: React.FC<FormInputProps> = ({ onSuccessSubmit }) => {
         console.log("response in else", responseData);
         const { created_at, ...newItem } = responseData;
         console.log("newItem", newItem.body);
-        dispatch(addItem(newItem.body));
-        //closes the modal
-        onSuccessSubmit!();
+
         if (response.status === 200 || response.status === 201) {
           console.log("in here status 201");
+          dispatch(addItem(newItem.body));
+          if (onSuccessSubmit && typeof onSuccessSubmit === "function") {
+            //closes the modal
+            onSuccessSubmit();
+          }
           setLongUrl("");
           toast({
             description: "Successfully shortened link!",
@@ -74,7 +77,9 @@ export const FormInput: React.FC<FormInputProps> = ({ onSuccessSubmit }) => {
       }
 
       console.log("longUrl", longUrl);
-    } catch (error) {}
+    } catch (error) {
+      console.log("Error occured:", error);
+    }
   };
   return (
     <>
