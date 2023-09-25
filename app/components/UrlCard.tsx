@@ -12,6 +12,7 @@ import {
 } from "@nextui-org/react";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { StarIcon } from "@radix-ui/react-icons";
+import DropDown from "./DropDown";
 
 type UrlData = {
   id: string;
@@ -45,9 +46,7 @@ export default function UrlCard({ data }: { data: UrlData }) {
               </p>
             </div>
           </div>
-          <Button variant="light" size="sm">
-            <DotsVerticalIcon className="text-6xl text-black" />
-          </Button>
+          <DropDown />
         </CardHeader>
       </Card>
     </div>
