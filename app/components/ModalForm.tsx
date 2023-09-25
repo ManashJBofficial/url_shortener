@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import {
   Modal,
@@ -19,7 +19,12 @@ import { PlusIcon } from "@/lib/utils/PulseIcon";
 import { FormInput } from "./FormInput";
 
 export default function ModalForm() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  const handleCloseModal = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
   return (
     <>
       <Button
@@ -47,34 +52,15 @@ export default function ModalForm() {
               </ModalHeader>
               <Divider className="" />
               <ModalBody>
-                {/* <Input
-                  isRequired
-                  isClearable
-                  id="input_id"
-                  type="url"
-                  name="long_url"
-                  // value={longUrl}
-                  // onChange={(e) => setLongUrl(e.target.value)}
-                  placeholder="Shorten your link"
-                  aria-describedby="text-input"
-                  startContent={
-                    <Link1Icon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                  }
-                  // onClear={() => setLongUrl("")}
-                  radius="sm"
-                /> */}
                 <div className="flex justify-center ">
-                  <FormInput />
+                  <FormInput onSuccessSubmit={handleCloseModal} />
                 </div>
               </ModalBody>
-              {/* <ModalFooter>
+              <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose} radius="sm">
-                  Create Link
-                </Button>
-              </ModalFooter> */}
+              </ModalFooter>
             </>
           )}
         </ModalContent>

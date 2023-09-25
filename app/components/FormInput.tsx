@@ -8,7 +8,11 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/itemSlice";
 
-export const FormInput = () => {
+type FormInputProps = {
+  onSuccessSubmit: () => void;
+};
+
+export const FormInput: React.FC<FormInputProps> = ({ onSuccessSubmit }) => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const userId = Cookies.get("user_id");
@@ -58,7 +62,8 @@ export const FormInput = () => {
         const { created_at, ...newItem } = responseData;
         console.log("newItem", newItem.body);
         dispatch(addItem(newItem.body));
-
+        //closes the modal
+        onSuccessSubmit();
         if (response.status === 200 || response.status === 201) {
           console.log("in here status 201");
           setLongUrl("");
