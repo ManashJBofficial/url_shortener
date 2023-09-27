@@ -82,3 +82,7 @@
 .width {
   width: 45rem;
 }
+
+.width-sm {
+  width: 25rem;
+}

@@ -14,9 +14,32 @@ import {
 } from "@nextui-org/react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { FormInput } from "./components/FormInput";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPublicLinks } from "../redux/publicLinkSlice";
+import { RootState } from "../redux/store";
+import UrlCard from "./components/UrlCard";
 
 const Page = () => {
+  const dispatch = useDispatch();
+  const publicLinks = useSelector(
+    (state: RootState) => state.publicLinks.publicLink
+  );
+
   const { data: session } = useSession();
+
+  const fetchDataFromLocalStorage = useCallback(() => {
+    const storedData = localStorage.getItem("publicLinks");
+    if (storedData) {
+      const linksData = JSON.parse(storedData);
+      dispatch(setPublicLinks(linksData));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchDataFromLocalStorage();
+  }, [fetchDataFromLocalStorage]);
+
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gray-50">
       <div className="absolute inset-0 z-0 ">
@@ -39,13 +62,12 @@ const Page = () => {
         <FormInput />
         <Toaster />
         <div className="pt-2 w-72 sm:w-64 md:w-96 xl:w-96">
-          <Card>
-            <CardBody>
-              <p>
-                Make beautiful websites regardless of your design experience.
-              </p>
-            </CardBody>
-          </Card>
+          {publicLinks &&
+            publicLinks.map((e, index) => (
+              <span key={`${e.id}-${index}`}>
+                <UrlCard data={e} width="width-sm" />
+              </span>
+            ))}
         </div>
       </div>
     </div>

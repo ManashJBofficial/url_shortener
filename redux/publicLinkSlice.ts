@@ -14,15 +14,15 @@ const publicLinkSlice = createSlice({
     publicLink: [] as PublicLinkType[],
   },
   reducers: {
-    setLinks: (state, action) => {
+    setPublicLinks: (state, action) => {
       state.publicLink = action.payload;
     },
-    addLinks: (state, action) => {
+    addPublicLinks: (state, action) => {
       state.publicLink.push(action.payload);
     },
   },
 });
 
-export const { setLinks, addLinks } = publicLinkSlice.actions;
+export const { setPublicLinks, addPublicLinks } = publicLinkSlice.actions;
 
 export default publicLinkSlice.reducer;

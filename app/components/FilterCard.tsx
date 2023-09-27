@@ -21,6 +21,7 @@ export default function FilterCard() {
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400 pb-5">
         <Input
+          id="filtercard-id"
           isClearable
           radius="lg"
           classNames={{

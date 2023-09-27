@@ -10,17 +10,14 @@ export const POST = async (req: Request, res: Response) => {
   const { longUrl } = await req.json();
 
   try {
-    const createdUrl = await prisma.shortenedURL.create({
+    const urlData = await prisma.shortenedURL.create({
       data: {
         long_url: longUrl,
         short_code: generateRandomString(6),
       },
     });
-    console.log("createdUrl(6)", createdUrl);
-    return NextResponse.json(
-      { shortcode: createdUrl.short_code },
-      { status: 201 }
-    );
+    console.log("urlData public:", urlData);
+    return NextResponse.json({ body: urlData }, { status: 201 });
   } catch (error) {
     console.error("Error creating URL:", error);
     return NextResponse.json(

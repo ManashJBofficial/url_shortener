@@ -22,10 +22,16 @@ type UrlData = {
   created_at: Date;
 };
 
-export default function UrlCard({ data }: { data: UrlData }) {
+export default function UrlCard({
+  data,
+  width,
+}: {
+  data: UrlData;
+  width: string;
+}) {
   return (
     <div className="pb-3 ">
-      <Card className="width p-2 cursor-pointer">
+      <Card className={`${width} p-2 cursor-pointer`}>
         <CardHeader className="flex justify-between items-center gap-5">
           <div className="flex gap-5 items-center">
             <Image
