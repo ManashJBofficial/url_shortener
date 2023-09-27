@@ -6,7 +6,7 @@ import { toast } from "@/components/ui/use-toast";
 import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../redux/itemSlice";
+import { addLinks } from "../../redux/linkSlice";
 
 type FormInputProps = {
   onSuccessSubmit?: () => void;
@@ -64,7 +64,7 @@ export const FormInput: React.FC<FormInputProps> = ({ onSuccessSubmit }) => {
 
         if (response.status === 200 || response.status === 201) {
           console.log("in here status 201");
-          dispatch(addItem(newItem.body));
+          dispatch(addLinks(newItem.body));
           if (onSuccessSubmit && typeof onSuccessSubmit === "function") {
             //closes the modal
             onSuccessSubmit();

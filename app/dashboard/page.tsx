@@ -12,7 +12,7 @@ import { getAuthUser } from "../serverAction/getAuthUser";
 import FilterCard from "../components/FilterCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { setItems } from "@/redux/itemSlice";
+import { setLinks } from "@/redux/linkSlice";
 
 // interface Site {
 //   id: string;
@@ -24,8 +24,8 @@ import { setItems } from "@/redux/itemSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state: RootState) => state.items.list);
-  console.log("card list", items);
+  const links = useSelector((state: RootState) => state.items.link);
+  console.log("card list", links);
   const { data: session } = useSession();
 
   // const [siteList, setSiteList] = useState<Site[]>([]);
@@ -52,7 +52,7 @@ const Dashboard = () => {
       const { created_at, ...newItem } = item;
       return newItem;
     });
-    dispatch(setItems(newData));
+    dispatch(setLinks(newData));
     // setSiteList(data);
     return data;
   }, [userId, dispatch]);
@@ -88,8 +88,8 @@ const Dashboard = () => {
             <FilterCard />
           </div>
           <div className="">
-            {items &&
-              items.map((e, index) => {
+            {links &&
+              links.map((e, index) => {
                 return (
                   <span key={`${e.id}-${index}`}>
                     <UrlCard data={e} />
