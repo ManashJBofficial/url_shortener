@@ -9,7 +9,7 @@ type LinkType = {
 };
 
 const linksSlice = createSlice({
-  name: "items",
+  name: "links",
   initialState: {
     link: [] as LinkType[],
   },
