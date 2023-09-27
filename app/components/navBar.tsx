@@ -37,7 +37,7 @@ export default function NavBar({ signOut, session }: NavBarProps) {
   }, [session, pathname]);
   return (
     <>
-      <div className="flex items-center justify-between h-20 w-full">
+      <div className="flex items-center justify-between h-20 w-full z-20">
         <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
           <div className="flex items-center justify-between">
             <div>

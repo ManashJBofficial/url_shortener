@@ -19,7 +19,7 @@ export default function DropDown() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu variant="flat" aria-label="Static Actions">
-        <DropdownItem key="edit">View Link</DropdownItem>
+        <DropdownItem key="edit">View Details</DropdownItem>
         <DropdownItem key="delete" className="text-danger" color="danger">
           Delete Link
         </DropdownItem>

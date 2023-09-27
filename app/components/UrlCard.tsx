@@ -24,8 +24,8 @@ type UrlData = {
 
 export default function UrlCard({ data }: { data: UrlData }) {
   return (
-    <div className="pb-3">
-      <Card className="width p-2 ">
+    <div className="pb-3 ">
+      <Card className="width p-2 cursor-pointer">
         <CardHeader className="flex justify-between items-center gap-5">
           <div className="flex gap-5 items-center">
             <Image

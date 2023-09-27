@@ -56,11 +56,6 @@ export default function ModalForm() {
                   <FormInput onSuccessSubmit={handleCloseModal} />
                 </div>
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>
