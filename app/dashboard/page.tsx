@@ -92,7 +92,12 @@ const Dashboard = () => {
               links.map((e, index) => {
                 return (
                   <span key={`${e.id}-${index}`}>
-                    <UrlCard data={e} width="width" />
+                    <UrlCard
+                      data={e}
+                      width="width"
+                      visibility="block"
+                      dropdown="block"
+                    />
                   </span>
                 );
               })}

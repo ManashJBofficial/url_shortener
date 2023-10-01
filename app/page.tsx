@@ -61,11 +61,16 @@ const Page = () => {
         </div>
         <FormInput />
         <Toaster />
-        <div className="pt-2 w-72 sm:w-64 md:w-96 xl:w-96">
+        <div className="">
           {publicLinks &&
             publicLinks.map((e, index) => (
               <span key={`${e.id}-${index}`}>
-                <UrlCard data={e} width="width-sm" />
+                <UrlCard
+                  data={e}
+                  width="width-sm"
+                  visibility="hidden"
+                  dropdown="hidden"
+                />
               </span>
             ))}
         </div>

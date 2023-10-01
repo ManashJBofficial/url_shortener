@@ -25,9 +25,13 @@ type UrlData = {
 export default function UrlCard({
   data,
   width,
+  visibility,
+  dropdown,
 }: {
   data: UrlData;
   width: string;
+  visibility: string;
+  dropdown: string;
 }) {
   return (
     <div className="pb-3 ">
@@ -40,6 +44,7 @@ export default function UrlCard({
               radius="sm"
               src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
               width={40}
+              className={visibility}
             />
             <div className="flex flex-col">
               <p className="text-md text-sky-900 font-bold">
@@ -52,7 +57,9 @@ export default function UrlCard({
               </p>
             </div>
           </div>
-          <DropDown />
+          <div className={dropdown}>
+            <DropDown />
+          </div>
         </CardHeader>
       </Card>
     </div>
