@@ -21,6 +21,7 @@ model ShortenedURLPrivate {
   userIdNo   String  
   created_at DateTime @default(now())
   user       User     @relation(fields: [userIdNo], references: [id])
+  visitors   VisitorDetails[]
 }
 
 model User {
@@ -59,4 +60,18 @@ model EmailPasswordCredential {
 
   // Define a one-to-one relationship with User
   user User @relation(fields: [user_id], references: [id])
+}
+
+model VisitorDetails {
+  id             String   @id @default(uuid())
+  visit_count    Int
+  ip             String
+  browser        String
+  device         String
+  location       String
+  created_at     DateTime @default(now())
+  last_updated_at DateTime @default(now())
+  long_url       String
+  short_url      String @unique
+  user           ShortenedURLPrivate @relation(fields: [short_url], references: [short_code])
 }

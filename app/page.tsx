@@ -19,6 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPublicLinks } from "../redux/publicLinkSlice";
 import { RootState } from "../redux/store";
 import UrlCard from "./components/UrlCard";
+import { Tooltip } from "@nextui-org/react";
+import { copyTextToClipboard } from "../lib/utils/CopyToClipboard";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -64,14 +66,21 @@ const Page = () => {
         <div className="">
           {publicLinks &&
             publicLinks.map((e, index) => (
-              <span key={`${e.id}-${index}`}>
-                <UrlCard
-                  data={e}
-                  width="width-sm"
-                  visibility="hidden"
-                  dropdown="hidden"
-                />
-              </span>
+              <Tooltip
+                showArrow={true}
+                placement="right"
+                content="Click to copy Link"
+                key={`${e.id}-${index}`}
+              >
+                <span>
+                  <UrlCard
+                    data={e}
+                    width="width-sm"
+                    visibility="hidden"
+                    dropdown="hidden"
+                  />
+                </span>
+              </Tooltip>
             ))}
         </div>
       </div>
