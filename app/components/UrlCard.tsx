@@ -9,10 +9,11 @@ import {
   Link,
   Image,
   Button,
+  useDisclosure,
 } from "@nextui-org/react";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import { StarIcon } from "@radix-ui/react-icons";
 import DropDown from "./DropDown";
+import VisitorModal from "../components/VisitorModal";
 
 type UrlData = {
   id: string;
@@ -33,6 +34,7 @@ export default function UrlCard({
   visibility: string;
   dropdown: string;
 }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div className="pb-3 ">
       <Card className={`${width} p-2 cursor-pointer`}>
@@ -58,10 +60,16 @@ export default function UrlCard({
             </div>
           </div>
           <div className={dropdown}>
-            <DropDown />
+            <DropDown onOpen={onOpen} />
           </div>
+          {/* <Button variant="light" size="sm" onPress={onOpen}>
+            <DotsVerticalIcon className="text-6xl text-black" />
+          </Button> */}
         </CardHeader>
       </Card>
+
+      {/* Open the VisitorModal when isOpen is true */}
+      {isOpen && <VisitorModal onClose={onClose} />}
     </div>
   );
 }
