@@ -69,7 +69,7 @@ export default function UrlCard({
       </Card>
 
       {/* Open the VisitorModal when isOpen is true */}
-      {isOpen && <VisitorModal onClose={onClose} />}
+      {isOpen && <VisitorModal onClose={onClose} data={data} />}
     </div>
   );
 }

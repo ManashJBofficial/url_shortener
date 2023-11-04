@@ -13,7 +13,6 @@ import FilterCard from "../components/FilterCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setLinks } from "@/redux/linkSlice";
-
 // interface Site {
 //   id: string;
 //   long_url: string;
@@ -87,7 +86,7 @@ const Dashboard = () => {
           <div className="div">
             <FilterCard />
           </div>
-          <div className="">
+          {/* <div className="">
             {links &&
               links.map((e, index) => {
                 return (
@@ -101,6 +100,20 @@ const Dashboard = () => {
                   </span>
                 );
               })}
+          </div> */}
+
+          <div className="flex flex-col">
+            {links &&
+              links.map((e, index) => (
+                <div key={`${e.id}-${index}`} className="mb-4">
+                  <UrlCard
+                    data={e}
+                    width="width"
+                    visibility="block"
+                    dropdown="block"
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </div>

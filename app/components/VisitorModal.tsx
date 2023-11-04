@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalContent,
@@ -7,51 +7,117 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Card,
+  CardBody,
 } from "@nextui-org/react";
+import { getShortUrlVisitor } from "../serverAction/getShortUrlVisitor";
 
+type UrlData = {
+  id: string;
+  long_url: string;
+  short_code: string;
+  userIdNo: string;
+  created_at: Date;
+};
 interface VisitorModalProps {
   onClose: () => void;
+  data: UrlData;
 }
-export default function VisitorModal({ onClose }: VisitorModalProps) {
-  const { isOpen, onOpen } = useDisclosure();
+
+export default function VisitorModal({ onClose, data }: VisitorModalProps) {
+  const [visitdata, setVisitData] = useState<
+    Array<{
+      visit_count: number;
+      devices: string[];
+      locations: string[];
+      browsers: string[];
+    }>
+  >([]);
+
+  useEffect(() => {
+    const getVisitorData = async () => {
+      try {
+        const res = await getShortUrlVisitor(data.short_code);
+        console.log("Result from getShortUrlVisitor:", res); // Log the result from the API call.
+        setVisitData((prevVisitData) => [...prevVisitData, res]); // Append the new data to the array.
+        console.log("visitdata after setting:", visitdata); // Log visitdata after setting.
+      } catch (error) {
+        console.error("Error fetching visitor data:", error);
+      }
+    };
+    getVisitorData();
+  }, [data.short_code]);
+  console.log("visitdata", visitdata); // Log visitdata before the useEffect updates it.
 
   return (
     <>
-      <Modal isOpen={true} onOpenChange={onClose}>
+      <Modal
+        isOpen={true}
+        onOpenChange={onClose}
+        backdrop="blur"
+        size="xl"
+        isDismissable={false}
+      >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Modal Title
-              </ModalHeader>
+              <ModalHeader className="flex flex-col gap-1"></ModalHeader>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                {visitdata.map((e, i) => (
+                  <div key={i} className="grid grid-cols-2 gap-4">
+                    <Card>
+                      <CardBody className="overflow-y-auto max-h-36">
+                        <h1 className="text-2xl font-bold">{e.visit_count}</h1>
+                        <p className="text-gray-500">Visit Count</p>
+                      </CardBody>
+                    </Card>
+                    <Card>
+                      <CardBody className="overflow-y-auto max-h-36">
+                        <h1 className="text-2xl font-bold">Locations</h1>
+                        {e.locations.length > 0 ? (
+                          e.locations.map((location, index) => (
+                            <p key={index} className="text-gray-500">
+                              {location}
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-gray-500">No data available</p>
+                        )}
+                      </CardBody>
+                    </Card>
+                    <Card>
+                      <CardBody className="overflow-y-auto max-h-36">
+                        <h1 className="text-2xl font-bold">Devices</h1>
+                        {e.devices.length > 0 ? (
+                          e.devices.map((device, index) => (
+                            <p key={index} className="text-gray-500">
+                              {device}
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-gray-500">No data available</p>
+                        )}
+                      </CardBody>
+                    </Card>
+                    <Card>
+                      <CardBody className="overflow-y-auto max-h-36">
+                        <h1 className="text-2xl font-bold">Browsers</h1>
+                        {e.devices.length > 0 ? (
+                          e.browsers.map((browser, index) => (
+                            <p key={index} className="text-gray-500">
+                              {browser}
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-gray-500">No data available</p>
+                        )}
+                      </CardBody>
+                    </Card>
+                  </div>
+                ))}
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
-                </Button>
-              </ModalFooter>
+
+              <ModalFooter></ModalFooter>
             </>
           )}
         </ModalContent>
