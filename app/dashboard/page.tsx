@@ -91,14 +91,14 @@ const Dashboard = () => {
             />
           </div>
           <div className="flex flex-col">
-            {links
-              ? links
-                  .filter((e) =>
-                    e.short_code
-                      .toLowerCase()
-                      .includes(filterValue.toLowerCase())
-                  )
-                  .map((e, index) => (
+            {links &&
+              links
+                .filter((e) =>
+                  e.short_code.toLowerCase().includes(filterValue.toLowerCase())
+                )
+                .map((e, index) => {
+                  console.log("e+", e);
+                  return (
                     <div key={`${e.id}-${index}`} className="mb-4 ">
                       <UrlCard
                         data={e}
@@ -107,8 +107,16 @@ const Dashboard = () => {
                         dropdown="block"
                       />
                     </div>
-                  ))
-              : "No data available !"}
+                  );
+                })}
+            {links.length > 0 &&
+              links.filter((e) =>
+                e.short_code.toLowerCase().includes(filterValue.toLowerCase())
+              ).length === 0 && (
+                <p className="text-center flex items-center self-center mt-14">
+                  No data available !
+                </p>
+              )}
           </div>
         </div>
       </div>

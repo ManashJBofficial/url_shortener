@@ -28,7 +28,6 @@ export default function FilterCard({
     setFilterValue(""); // Clear the input value
   };
 
-  console.log("filterValue", filterValue);
   return (
     <Card className="max-w-[340px] p-2">
       <CardHeader className="justify-between">
@@ -64,7 +63,7 @@ export default function FilterCard({
           }}
           value={filterValue}
           onChange={handleInputChange}
-          placeholder="Type to search..."
+          placeholder="Type short codes to search..."
           startContent={
             <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
           }
