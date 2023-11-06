@@ -29,6 +29,7 @@ const Dashboard = () => {
 
   // const [siteList, setSiteList] = useState<Site[]>([]);
   const [userId, setUserId] = useState("");
+  const [filterValue, setFilterValue] = useState("");
 
   const storeUserId = useCallback(async () => {
     const email = session?.user?.email as string;
@@ -84,20 +85,30 @@ const Dashboard = () => {
       <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20 py-12">
         <div className="flex  items-start justify-between flex-wrap">
           <div className="div mb-5">
-            <FilterCard />
+            <FilterCard
+              filterValue={filterValue}
+              setFilterValue={setFilterValue}
+            />
           </div>
           <div className="flex flex-col">
-            {links &&
-              links.map((e, index) => (
-                <div key={`${e.id}-${index}`} className="mb-4 ">
-                  <UrlCard
-                    data={e}
-                    width="responsive-width"
-                    visibility="block"
-                    dropdown="block"
-                  />
-                </div>
-              ))}
+            {links
+              ? links
+                  .filter((e) =>
+                    e.short_code
+                      .toLowerCase()
+                      .includes(filterValue.toLowerCase())
+                  )
+                  .map((e, index) => (
+                    <div key={`${e.id}-${index}`} className="mb-4 ">
+                      <UrlCard
+                        data={e}
+                        width="responsive-width"
+                        visibility="block"
+                        dropdown="block"
+                      />
+                    </div>
+                  ))
+              : "No data available !"}
           </div>
         </div>
       </div>

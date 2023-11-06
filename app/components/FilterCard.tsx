@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Card,
@@ -11,7 +11,24 @@ import {
 } from "@nextui-org/react";
 import { SearchIcon } from "../../lib/utils/SearchIcon";
 
-export default function FilterCard() {
+interface FilterCardProps {
+  filterValue: string; // Specify the type of filterValue
+  setFilterValue: React.Dispatch<React.SetStateAction<string>>; // Specify the type of setFilterValue
+}
+
+export default function FilterCard({
+  filterValue,
+  setFilterValue,
+}: FilterCardProps) {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFilterValue(value); // Update the state with the input value
+  };
+  const handleClear = () => {
+    setFilterValue(""); // Clear the input value
+  };
+
+  console.log("filterValue", filterValue);
   return (
     <Card className="max-w-[340px] p-2">
       <CardHeader className="justify-between">
@@ -22,6 +39,9 @@ export default function FilterCard() {
       <CardBody className="px-3 py-0 text-small text-default-400 pb-5">
         <Input
           id="filtercard-id"
+          aria-describedby="filter-input"
+          type="text"
+          onClear={handleClear}
           isClearable
           radius="lg"
           classNames={{
@@ -42,6 +62,8 @@ export default function FilterCard() {
               "!cursor-text",
             ],
           }}
+          value={filterValue}
+          onChange={handleInputChange}
           placeholder="Type to search..."
           startContent={
             <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
