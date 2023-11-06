@@ -86,3 +86,20 @@
 .width-sm {
   width: 25rem;
 }
+
+/* Define the responsive width class */
+.responsive-width {
+  width: 100%; /* This sets the width to 100% for smaller screens */
+
+  @media (min-width: 640px) {
+    width: 80%; /* Adjust the width for screens larger than 640px */
+  }
+
+  @media (min-width: 768px) {
+    width: 35rem; /* Adjust the width for tablets (768px) */
+  }
+
+  @media (min-width: 1024px) {
+    width: 45rem; /* Further adjust the width for larger screens */
+  }
+}

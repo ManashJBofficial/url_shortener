@@ -82,33 +82,17 @@ const Dashboard = () => {
       </div>
       <Toaster />
       <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20 py-12">
-        <div className="flex  items-start justify-between">
-          <div className="div">
+        <div className="flex  items-start justify-between flex-wrap">
+          <div className="div mb-5">
             <FilterCard />
           </div>
-          {/* <div className="">
-            {links &&
-              links.map((e, index) => {
-                return (
-                  <span key={`${e.id}-${index}`}>
-                    <UrlCard
-                      data={e}
-                      width="width"
-                      visibility="block"
-                      dropdown="block"
-                    />
-                  </span>
-                );
-              })}
-          </div> */}
-
           <div className="flex flex-col">
             {links &&
               links.map((e, index) => (
-                <div key={`${e.id}-${index}`} className="mb-4">
+                <div key={`${e.id}-${index}`} className="mb-4 ">
                   <UrlCard
                     data={e}
-                    width="width"
+                    width="responsive-width"
                     visibility="block"
                     dropdown="block"
                   />
