@@ -10,7 +10,12 @@ import {
 } from "@nextui-org/react";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 
-export default function DropDown() {
+type DropDownProps = {
+  onOpen: () => void;
+  onDeleteOpen: () => void;
+};
+
+export default function DropDown({ onOpen, onDeleteOpen }: DropDownProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -19,8 +24,15 @@ export default function DropDown() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu variant="flat" aria-label="Static Actions">
-        <DropdownItem key="edit">View Details</DropdownItem>
-        <DropdownItem key="delete" className="text-danger" color="danger">
+        <DropdownItem key="edit" onClick={onOpen}>
+          View Details
+        </DropdownItem>
+        <DropdownItem
+          key="delete"
+          className="text-danger"
+          color="danger"
+          onClick={onDeleteOpen}
+        >
           Delete Link
         </DropdownItem>
       </DropdownMenu>

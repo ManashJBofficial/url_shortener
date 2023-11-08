@@ -1,10 +1,39 @@
 import prisma from "../../../lib/db";
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { visitorDetails } from "../../serverAction/storeVisitorDetails";
+
+async function fetchIpInfo() {
+  try {
+    const response = await fetch("https://ip.nf/me.json");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching IP info:", error);
+  }
+}
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
   if (req.method !== "GET") {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
   }
+  // console.log("req=+", req.headers);
+
+  const getIp = await fetchIpInfo();
+  const ip = getIp.ip.ip;
+  console.log("ip", ip);
+  const country = getIp.ip.country;
+  console.log("country", country);
+  const headersList = headers();
+  const browserArr = headersList.get("sec-ch-ua");
+  const browser = browserArr?.split(",")[1].split(";")[0];
+  console.log("browser=", browser);
+  const os = headersList.get("sec-ch-ua-platform");
+  console.log("os=", os);
 
   const shortcodeMatch = req.url.split("?shortcode=")[1];
   const shortcode = shortcodeMatch !== null ? shortcodeMatch : null;
@@ -28,6 +57,17 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     }
 
     const responseData = urlEntry || urlEntryPrivate;
+
+    const visitorData = {
+      ip: ip,
+      country: country,
+      browser: browser,
+      os: os,
+      short_code: shortcode,
+      long_url: responseData?.long_url,
+    };
+    const visit_detail = await visitorDetails(visitorData);
+    console.log("visit_detail", visit_detail);
 
     if (responseData) {
       return NextResponse.json({ url: responseData.long_url }, { status: 200 });

@@ -26,10 +26,8 @@ function Page({ params }: { params: { id: string } }) {
         setError("Invalid Shortcode");
       }
     };
-
     fetchData();
   }, [apiUrl]);
-
   useEffect(() => {
     if (responseData && responseData.url) {
       redirect(responseData.url);

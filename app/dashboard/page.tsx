@@ -13,7 +13,6 @@ import FilterCard from "../components/FilterCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setLinks } from "@/redux/linkSlice";
-
 // interface Site {
 //   id: string;
 //   long_url: string;
@@ -30,6 +29,7 @@ const Dashboard = () => {
 
   // const [siteList, setSiteList] = useState<Site[]>([]);
   const [userId, setUserId] = useState("");
+  const [filterValue, setFilterValue] = useState("");
 
   const storeUserId = useCallback(async () => {
     const email = session?.user?.email as string;
@@ -83,24 +83,39 @@ const Dashboard = () => {
       </div>
       <Toaster />
       <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20 py-12">
-        <div className="flex  items-start justify-between">
-          <div className="div">
-            <FilterCard />
+        <div className="flex  items-start justify-between flex-wrap">
+          <div className="div mb-5">
+            <FilterCard
+              filterValue={filterValue}
+              setFilterValue={setFilterValue}
+            />
           </div>
-          <div className="">
+          <div className="flex flex-col">
             {links &&
-              links.map((e, index) => {
-                return (
-                  <span key={`${e.id}-${index}`}>
-                    <UrlCard
-                      data={e}
-                      width="width"
-                      visibility="block"
-                      dropdown="block"
-                    />
-                  </span>
-                );
-              })}
+              links
+                .filter((e) =>
+                  e.short_code.toLowerCase().includes(filterValue.toLowerCase())
+                )
+                .map((e, index) => {
+                  return (
+                    <div key={`${e.id}-${index}`} className="mb-4 ">
+                      <UrlCard
+                        data={e}
+                        width="responsive-width"
+                        visibility="block"
+                        dropdown="block"
+                      />
+                    </div>
+                  );
+                })}
+            {links.length > 0 &&
+              links.filter((e) =>
+                e.short_code.toLowerCase().includes(filterValue.toLowerCase())
+              ).length === 0 && (
+                <p className="text-center flex items-center self-center mt-14">
+                  No data available !
+                </p>
+              )}
           </div>
         </div>
       </div>
