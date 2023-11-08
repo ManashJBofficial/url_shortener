@@ -9,6 +9,8 @@ import {
 } from "@nextui-org/react";
 import { deleteLinks } from "../../redux/linkSlice";
 import { toast } from "@/components/ui/use-toast";
+import { useDispatch } from "react-redux";
+import { deleteLink } from "../serverAction/deleteLink";
 
 type UrlData = {
   id: string;
@@ -24,10 +26,11 @@ type DeleteConfirmProps = {
 };
 
 export default function DeleteConfirm({ onDelete, data }: DeleteConfirmProps) {
+  const dispatch = useDispatch();
   const deleteHandler = async () => {
     try {
-      // const res = await deleteLink(data.short_code);
-      // dispatch(deleteLinks(data.id));
+      const res = await deleteLink(data.short_code);
+      dispatch(deleteLinks(data.id));
       toast({
         description: "Link deleted successfully!",
       });
@@ -67,7 +70,4 @@ export default function DeleteConfirm({ onDelete, data }: DeleteConfirmProps) {
       </Modal>
     </>
   );
-}
-function dispatch(arg0: { payload: any; type: "links/deleteLinks" }) {
-  throw new Error("Function not implemented.");
 }
