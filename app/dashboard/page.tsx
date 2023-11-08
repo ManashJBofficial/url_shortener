@@ -97,7 +97,6 @@ const Dashboard = () => {
                   e.short_code.toLowerCase().includes(filterValue.toLowerCase())
                 )
                 .map((e, index) => {
-                  console.log("e+", e);
                   return (
                     <div key={`${e.id}-${index}`} className="mb-4 ">
                       <UrlCard

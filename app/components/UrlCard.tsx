@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Card,
@@ -14,6 +14,7 @@ import {
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import DropDown from "./DropDown";
 import VisitorModal from "../components/VisitorModal";
+import DeleteConfirm from "../components/DeleteConfirm";
 
 type UrlData = {
   id: string;
@@ -34,7 +35,9 @@ export default function UrlCard({
   visibility: string;
   dropdown: string;
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const visitorModal = useDisclosure();
+  const deleteModal = useDisclosure();
+
   return (
     <div className="pb-3 ">
       <Card className={`${width} p-2 cursor-pointer`}>
@@ -60,7 +63,10 @@ export default function UrlCard({
             </div>
           </div>
           <div className={dropdown}>
-            <DropDown onOpen={onOpen} />
+            <DropDown
+              onOpen={visitorModal.onOpen}
+              onDeleteOpen={deleteModal.onOpen}
+            />
           </div>
           {/* <Button variant="light" size="sm" onPress={onOpen}>
             <DotsVerticalIcon className="text-6xl text-black" />
@@ -69,7 +75,14 @@ export default function UrlCard({
       </Card>
 
       {/* Open the VisitorModal when isOpen is true */}
-      {isOpen && <VisitorModal onClose={onClose} data={data} />}
+      {visitorModal.isOpen && (
+        <VisitorModal onClose={visitorModal.onClose} data={data} />
+      )}
+
+      {/* Open the DeleteModal when isOpen is true */}
+      {deleteModal.isOpen && (
+        <DeleteConfirm onDelete={deleteModal.onClose} data={data} />
+      )}
     </div>
   );
 }

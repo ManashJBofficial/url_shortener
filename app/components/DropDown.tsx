@@ -9,14 +9,13 @@ import {
   Button,
 } from "@nextui-org/react";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import VisitorModal from "../components/VisitorModal";
-import ModalForm from "../components/ModalForm";
 
 type DropDownProps = {
   onOpen: () => void;
+  onDeleteOpen: () => void;
 };
 
-export default function DropDown({ onOpen }: DropDownProps) {
+export default function DropDown({ onOpen, onDeleteOpen }: DropDownProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -28,7 +27,12 @@ export default function DropDown({ onOpen }: DropDownProps) {
         <DropdownItem key="edit" onClick={onOpen}>
           View Details
         </DropdownItem>
-        <DropdownItem key="delete" className="text-danger" color="danger">
+        <DropdownItem
+          key="delete"
+          className="text-danger"
+          color="danger"
+          onClick={onDeleteOpen}
+        >
           Delete Link
         </DropdownItem>
       </DropdownMenu>

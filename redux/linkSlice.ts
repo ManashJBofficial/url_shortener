@@ -20,9 +20,12 @@ const linksSlice = createSlice({
     addLinks: (state, action) => {
       state.link.push(action.payload);
     },
+    deleteLinks: (state, action) => {
+      state.link = state.link.filter((link) => link.id !== action.payload);
+    },
   },
 });
 
-export const { setLinks, addLinks } = linksSlice.actions;
+export const { setLinks, addLinks, deleteLinks } = linksSlice.actions;
 
 export default linksSlice.reducer;
