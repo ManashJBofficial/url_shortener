@@ -142,21 +142,6 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="flex justify-center fixed bottom-0 w-full bg-white py-4 bg-white-700 z-10">
-        {/* <div className="pagination">
-          <span
-            onClick={() => handlePageChange(page - 1)}
-            className={page > 1 ? "" : "pagination__disable"}
-          >
-            ◀
-          </span>
-          {renderPagination()}
-          <span
-            onClick={() => handlePageChange(page + 1)}
-            className={page < totalPages ? "" : "pagination__disable"}
-          >
-            ▶
-          </span>
-        </div> */}
         <div className="flex justify-center mt-4">
           <PaginationComponent
             currentPage={page}
@@ -164,6 +149,30 @@ const Dashboard = () => {
             onChange={handlePageChange}
           />
         </div>
+
+        {/* <div className="flex items-center justify-center mt-8 space-x-4">
+          <button
+            onClick={() => handlePageChange(page - 1)}
+            disabled={page <= 1}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+              page <= 1 && "opacity-50 cursor-not-allowed"
+            }`}
+          >
+            Previous
+          </button>
+
+          {renderPagination()}
+
+          <button
+            onClick={() => handlePageChange(page + 1)}
+            disabled={page >= totalPages}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+              page >= totalPages && "opacity-50 cursor-not-allowed"
+            }`}
+          >
+            Next
+          </button>
+        </div> */}
       </div>
     </>
   );

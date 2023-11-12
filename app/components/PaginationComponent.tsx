@@ -16,7 +16,6 @@ export default function PaginationComponent({
     <Pagination
       total={totalPages}
       initialPage={currentPage}
-      showControls
       isCompact
       onChange={onChange}
     />
