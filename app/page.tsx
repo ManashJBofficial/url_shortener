@@ -65,24 +65,19 @@ const Page = () => {
         <Toaster />
         <div className="">
           {publicLinks &&
-            publicLinks.map((e, index) => (
-              <Tooltip
-                showArrow={true}
-                placement="right"
-                content="Click to copy Link"
-                key={`${e.id}-${index}`}
-              >
-                <span>
+            [...publicLinks]
+              .reverse()
+              .slice(0, 3)
+              .map((e, index) => (
+                <span key={`${e.id}-${index}`}>
                   <UrlCard
                     data={e}
                     width="width-sm"
                     visibility="hidden"
-                    // dropdown="block"
                     drop={false}
                   />
                 </span>
-              </Tooltip>
-            ))}
+              ))}
         </div>
       </div>
     </div>

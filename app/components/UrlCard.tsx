@@ -83,7 +83,7 @@ export default function UrlCard({
           </div>
           <div className="flex items-center space-x-2">
             <button
-              className="bg-gray-200 text-gray-800 p-2 rounded-full hover:bg-gray-400"
+              className="bg-gray-100 text-gray-800 p-2 rounded-full hover:bg-gray-400 "
               onClick={handleCopyClick}
             >
               {copied ? <CheckIcon /> : <CopyIcon />}

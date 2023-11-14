@@ -41,7 +41,9 @@ export default function NavBarComponent({ signOut, session }: NavBarProps) {
         <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-bold text-inherit">SHORTY</p>
+              <p className="font-extrabold text-inherit">
+                <a href={`${process.env.BASE_URL}`}>SHORTY</a>
+              </p>
             </div>
 
             <div>
