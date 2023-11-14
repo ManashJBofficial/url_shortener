@@ -29,12 +29,12 @@ export default function UrlCard({
   data,
   width,
   visibility,
-  dropdown,
+  drop,
 }: {
   data: UrlData;
   width: string;
   visibility: string;
-  dropdown: string;
+  drop: boolean;
 }) {
   const visitorModal = useDisclosure();
   const deleteModal = useDisclosure();
@@ -46,7 +46,9 @@ export default function UrlCard({
     setCopied(true);
 
     // Logic to copy data.short_code to clipboard
-    navigator.clipboard.writeText(`shor.ty/${data?.short_code}`);
+    navigator.clipboard.writeText(
+      `${process.env.BASE_URL}/${data?.short_code}`
+    );
     toast({
       description: "Link copied successfully!",
     });
@@ -79,17 +81,19 @@ export default function UrlCard({
               </p>
             </div>
           </div>
-          <div className={`${dropdown} flex items-center space-x-2`}>
+          <div className="flex items-center space-x-2">
             <button
               className="bg-gray-200 text-gray-800 p-2 rounded-full hover:bg-gray-400"
               onClick={handleCopyClick}
             >
               {copied ? <CheckIcon /> : <CopyIcon />}
             </button>
-            <DropDown
-              onOpen={visitorModal.onOpen}
-              onDeleteOpen={deleteModal.onOpen}
-            />
+            {drop ? (
+              <DropDown
+                onOpen={visitorModal.onOpen}
+                onDeleteOpen={deleteModal.onOpen}
+              />
+            ) : null}
           </div>
         </CardHeader>
       </Card>

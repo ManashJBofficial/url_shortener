@@ -77,7 +77,8 @@ const Page = () => {
                     data={e}
                     width="width-sm"
                     visibility="hidden"
-                    dropdown="hidden"
+                    // dropdown="block"
+                    drop={false}
                   />
                 </span>
               </Tooltip>

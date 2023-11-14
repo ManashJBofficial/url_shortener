@@ -125,7 +125,8 @@ const Dashboard = () => {
                         data={e}
                         width="responsive-width"
                         visibility="block"
-                        dropdown="block"
+                        // dropdown="block"
+                        drop={true}
                       />
                     </div>
                   );
