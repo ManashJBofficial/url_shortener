@@ -11,10 +11,11 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { CheckIcon, CopyIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
 import DropDown from "./DropDown";
 import VisitorModal from "../components/VisitorModal";
 import DeleteConfirm from "../components/DeleteConfirm";
+import { toast } from "@/components/ui/use-toast";
 
 type UrlData = {
   id: string;
@@ -28,16 +29,34 @@ export default function UrlCard({
   data,
   width,
   visibility,
-  dropdown,
+  drop,
 }: {
   data: UrlData;
   width: string;
   visibility: string;
-  dropdown: string;
+  drop: boolean;
 }) {
   const visitorModal = useDisclosure();
   const deleteModal = useDisclosure();
 
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyClick = () => {
+    // Show check icon immediately
+    setCopied(true);
+
+    // Logic to copy data.short_code to clipboard
+    navigator.clipboard.writeText(
+      `${process.env.BASE_URL}/${data?.short_code}`
+    );
+    toast({
+      description: "Link copied successfully!",
+    });
+    // Revert back to copy icon after a short delay (e.g., 500 milliseconds)
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
   return (
     <div className="pb-3 ">
       <Card className={`${width} p-2 cursor-pointer`}>
@@ -62,15 +81,20 @@ export default function UrlCard({
               </p>
             </div>
           </div>
-          <div className={dropdown}>
-            <DropDown
-              onOpen={visitorModal.onOpen}
-              onDeleteOpen={deleteModal.onOpen}
-            />
+          <div className="flex items-center space-x-2">
+            <button
+              className="bg-gray-100 text-gray-800 p-2 rounded-full hover:bg-gray-400 "
+              onClick={handleCopyClick}
+            >
+              {copied ? <CheckIcon /> : <CopyIcon />}
+            </button>
+            {drop ? (
+              <DropDown
+                onOpen={visitorModal.onOpen}
+                onDeleteOpen={deleteModal.onOpen}
+              />
+            ) : null}
           </div>
-          {/* <Button variant="light" size="sm" onPress={onOpen}>
-            <DotsVerticalIcon className="text-6xl text-black" />
-          </Button> */}
         </CardHeader>
       </Card>
 

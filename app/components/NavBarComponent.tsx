@@ -21,7 +21,7 @@ interface NavBarProps {
   signOut: () => void;
   session?: any;
 }
-export default function NavBar({ signOut, session }: NavBarProps) {
+export default function NavBarComponent({ signOut, session }: NavBarProps) {
   const [avatar, setAvatar] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -41,7 +41,9 @@ export default function NavBar({ signOut, session }: NavBarProps) {
         <div className="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-bold text-inherit">SHORTY</p>
+              <p className="font-extrabold text-inherit">
+                <a href={`${process.env.BASE_URL}`}>SHORTY</a>
+              </p>
             </div>
 
             <div>
@@ -89,9 +91,6 @@ export default function NavBar({ signOut, session }: NavBarProps) {
                   <DropdownItem key="profile" className="h-14 gap-2">
                     <p className="font-semibold">{userName}</p>
                     <p className="font-normal text-gray-500">{userEmail}</p>
-                  </DropdownItem>
-                  <DropdownItem key="settings" textValue="">
-                    My Settings
                   </DropdownItem>
                   <DropdownItem
                     key="logout"

@@ -87,6 +87,26 @@
   width: 25rem;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding: 10px;
+  margin: 15 0px;
+}
+.pagination > span {
+  padding: 15px 20px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.pagination__selected {
+  background-color: aqua;
+}
+.pagination__disable {
+  display: none;
+}
+
 /* Define the responsive width class */
 .responsive-width {
   width: 100%; /* This sets the width to 100% for smaller screens */
