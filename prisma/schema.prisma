@@ -10,53 +10,60 @@ datasource db {
 model ShortenedURL {
   id         String   @id @default(uuid())
   long_url   String
-  short_code String   @unique 
+  short_code String   @unique
   created_at DateTime @default(now())
 }
 
 model ShortenedURLPrivate {
-  id         String   @id @default(uuid())
+  id         String           @id @default(uuid())
   long_url   String
-  short_code String   @unique
-  userIdNo   String  
-  created_at DateTime @default(now())
-  user       User     @relation(fields: [userIdNo], references: [id])
+  short_code String           @unique
+  userIdNo   String
+  created_at DateTime         @default(now())
+  user       User             @relation(fields: [userIdNo], references: [id])
+  visitors   VisitorDetails[]
 }
 
 model User {
-  id         String   @id @default(uuid())
-  user_id    String   @unique
-  name       String?
-  email   String
-  created_at DateTime @default(now())
-  image_url  String?  
-
-  // Define a one-to-many relationship with AuthProvider
+  id                      String                    @id @default(uuid())
+  user_id                 String                    @unique
+  name                    String?
+  email                   String
+  created_at              DateTime                  @default(now())
+  image_url               String?
   authProviders           AuthProvider[]
   EmailPasswordCredential EmailPasswordCredential[]
-  shortenedURLPrivates        ShortenedURLPrivate[]
+  shortenedURLPrivates    ShortenedURLPrivate[]
 }
 
 model AuthProvider {
-  id             String  @id @default(uuid())
-  provider       String
-  provider_id    String
-  user_id        String
+  id          String @id @default(uuid())
+  provider    String
+  provider_id String
+  user_id     String
+  user        User   @relation(fields: [user_id], references: [id])
 
-  // Define a many-to-one relationship with User
-  user User @relation(fields: [user_id], references: [id])
-
-  // Add a unique constraint to ensure a user has only one entry per provider
   @@unique([user_id, provider])
 }
 
-// Define the EmailPasswordCredential model
 model EmailPasswordCredential {
   id       String @id @default(uuid())
   email    String @unique
   password String
   user_id  String
+  user     User   @relation(fields: [user_id], references: [id])
+}
 
-  // Define a one-to-one relationship with User
-  user User @relation(fields: [user_id], references: [id])
+model VisitorDetails {
+  id              String              @id @default(uuid())
+  visit_count     Int
+  ip              String
+  browser         String
+  device          String
+  location        String
+  created_at      DateTime            @default(now())
+  last_updated_at DateTime            @default(now())
+  long_url        String
+  short_url_code  String
+  user            ShortenedURLPrivate @relation(fields: [short_url_code], references: [short_code])
 }

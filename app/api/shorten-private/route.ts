@@ -1,8 +1,17 @@
 import prisma from "../../../lib/db";
 import { NextResponse } from "next/server";
 import { generateRandomString } from "../../../lib/utils/RandomString";
+import handler from "../../isAuth";
 
 export const POST = async (req: Request, res: Response) => {
+  const result = await handler(req, res);
+  if (!result) {
+    return NextResponse.json(
+      { message: "You must be logged in." },
+      { status: 401 }
+    );
+  }
+
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
   }
@@ -10,7 +19,7 @@ export const POST = async (req: Request, res: Response) => {
   const { longUrl, userIdNumber } = await req.json();
 
   try {
-    const createdUrl = await prisma.shortenedURLPrivate.create({
+    const urlData = await prisma.shortenedURLPrivate.create({
       data: {
         long_url: longUrl,
         userIdNo: userIdNumber,
@@ -18,8 +27,8 @@ export const POST = async (req: Request, res: Response) => {
       },
     });
 
-    console.log("createdUrl(6)", createdUrl);
-    return NextResponse.json({ body: createdUrl }, { status: 201 });
+    console.log("urlData", urlData);
+    return NextResponse.json({ body: urlData }, { status: 201 });
   } catch (error) {
     console.error("Error creating URL:", error);
     return NextResponse.json(

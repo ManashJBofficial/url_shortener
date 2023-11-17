@@ -1,0 +1,13 @@
+"use server";
+
+import { getServerSession } from "next-auth/next";
+import { NextRequest, NextResponse } from "next/server";
+
+export default async function handler(req: Request, res: Response) {
+  const session = await getServerSession();
+  if (!session) {
+    NextResponse.json({ message: "You must be logged in." }, { status: 401 });
+    return;
+  }
+  return NextResponse.json({ message: "Success" }, { status: 200 });
+}
