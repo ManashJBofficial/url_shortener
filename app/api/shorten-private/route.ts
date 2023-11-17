@@ -1,8 +1,17 @@
 import prisma from "../../../lib/db";
 import { NextResponse } from "next/server";
 import { generateRandomString } from "../../../lib/utils/RandomString";
+import handler from "../../isAuth";
 
 export const POST = async (req: Request, res: Response) => {
+  const result = await handler(req, res);
+  if (!result) {
+    return NextResponse.json(
+      { message: "You must be logged in." },
+      { status: 401 }
+    );
+  }
+
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
   }
