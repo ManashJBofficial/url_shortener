@@ -28,7 +28,6 @@ export const POST = async (req: Request, res: Response) => {
       },
     });
 
-    console.log("inserted data", insertUser);
     return NextResponse.json({ status: 201 });
   } catch (error) {
     return NextResponse.json(

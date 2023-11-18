@@ -38,16 +38,13 @@ export default function VisitorModal({ onClose, data }: VisitorModalProps) {
     const getVisitorData = async () => {
       try {
         const res = await getShortUrlVisitor(data.short_code);
-        console.log("Result from getShortUrlVisitor:", res); // Log the result from the API call.
         setVisitData((prevVisitData) => [...prevVisitData, res]); // Append the new data to the array.
-        console.log("visitdata after setting:", visitdata); // Log visitdata after setting.
       } catch (error) {
         console.error("Error fetching visitor data:", error);
       }
     };
     getVisitorData();
   }, [data.short_code]);
-  console.log("visitdata", visitdata); // Log visitdata before the useEffect updates it.
 
   return (
     <>

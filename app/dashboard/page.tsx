@@ -18,7 +18,6 @@ import PaginationComponent from "../components/PaginationComponent";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const links = useSelector((state: RootState) => state.items.link);
-  console.log("card list", links);
   const { data: session } = useSession();
 
   // const [siteList, setSiteList] = useState<Site[]>([]);
@@ -32,7 +31,6 @@ const Dashboard = () => {
     const image_url_prefix = image_url?.match(regex)![0];
     const currentUser = await getAuthUser(email, image_url_prefix);
     const currentUserId = currentUser!.id;
-    console.log("currentUserId in dashboard", currentUserId);
     setUserId(currentUserId);
     return currentUserId;
   }, [session]);

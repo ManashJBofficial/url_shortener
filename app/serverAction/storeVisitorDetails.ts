@@ -27,10 +27,7 @@ const visitorDetails = async (visitor_data: any) => {
           short_url_code: visitor_data.short_code as string,
         },
       });
-      console.log(
-        "New visitor created due to browser/device change:",
-        newVisitor
-      );
+
       return newVisitor;
     } else {
       // If the browser and device haven't changed, update the existing record
@@ -41,7 +38,6 @@ const visitorDetails = async (visitor_data: any) => {
           last_updated_at: new Date(),
         },
       });
-      console.log("Visitor updated:", updatedVisitor);
       return updatedVisitor;
     }
   } else {
@@ -57,7 +53,6 @@ const visitorDetails = async (visitor_data: any) => {
         short_url_code: visitor_data.short_code as string,
       },
     });
-    console.log("New visitor created:", newVisitor);
     return newVisitor;
   }
 };

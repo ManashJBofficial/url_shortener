@@ -9,7 +9,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     const getAllPublicUrls = await prisma.shortenedURL.findMany();
 
-    console.log("getAllPublicUrls", getAllPublicUrls);
     if (!getAllPublicUrls) {
       return NextResponse.json(
         { error: "Shortcode not found" },

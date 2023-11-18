@@ -27,7 +27,6 @@ export const POST = async (req: Request, res: Response) => {
       },
     });
 
-    console.log("urlData", urlData);
     return NextResponse.json({ body: urlData }, { status: 201 });
   } catch (error) {
     console.error("Error creating URL:", error);

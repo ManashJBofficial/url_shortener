@@ -16,7 +16,6 @@ export const POST = async (req: Request, res: Response) => {
         short_code: generateRandomString(6),
       },
     });
-    console.log("urlData public:", urlData);
     return NextResponse.json({ body: urlData }, { status: 201 });
   } catch (error) {
     console.error("Error creating URL:", error);
