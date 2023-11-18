@@ -72,7 +72,7 @@ export default function UrlCard({
             />
             <div className="flex flex-col">
               <p className="text-md text-sky-900 font-bold">
-                shor.ty/{data?.short_code}
+                shortyurl.vercel.app/{data?.short_code}
               </p>
               <p className="text-small text-default-500 ">
                 <span className="text-default-500 hover:underline">

@@ -26,19 +26,12 @@ const handler = NextAuth({
       const isExist = await prisma.user.findUnique({
         where: { user_id: id as string },
       });
-      console.log("isExist=>", isExist);
 
       if (isExist !== null) {
-        console.log("in if");
         return true;
       } else {
-        console.log("in else");
-
         if (account?.provider === "google") {
-          console.log("in google");
-
           const apiUrl = `${process.env.BASE_URL}/api/user`;
-          console.log("apiUrl", apiUrl);
           const postData = {
             name: name,
             email: email,
@@ -49,10 +42,7 @@ const handler = NextAuth({
           const response = await axios.post(apiUrl, postData);
           return true;
         } else if (account?.provider === "github") {
-          console.log("in github");
-
           const apiUrl = `${process.env.BASE_URL}/api/user`;
-          console.log("apiUrl", apiUrl);
           const postData = {
             name: name,
             email: email,

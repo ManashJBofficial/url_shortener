@@ -5,7 +5,6 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 
 function Page({ params }: { params: { id: string } }) {
-  console.log(params.id);
   const apiUrl = `${process.env.BASE_URL}/api/redirect?shortcode=${params.id}`;
   const [responseData, setResponseData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -15,14 +14,12 @@ function Page({ params }: { params: { id: string } }) {
       try {
         const resp = await axios.get(apiUrl);
 
-        console.log("resp", resp);
         if (resp.status === 200 && resp.data && resp.data.url) {
           setResponseData(resp.data);
         } else {
           setError("Shortcode not found");
         }
       } catch (error) {
-        console.log("err", error);
         setError("Invalid Shortcode");
       }
     };

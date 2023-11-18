@@ -21,24 +21,18 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   if (req.method !== "GET") {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
   }
-  // console.log("req=+", req.headers);
 
   const getIp = await fetchIpInfo();
   const ip = getIp.ip.ip;
-  console.log("ip", ip);
   const country = getIp.ip.country;
-  console.log("country", country);
   const headersList = headers();
   const browserArr = headersList.get("sec-ch-ua");
   const browser = browserArr?.split(",")[1].split(";")[0];
-  console.log("browser=", browser);
   const os = headersList.get("sec-ch-ua-platform");
-  console.log("os=", os);
 
   const shortcodeMatch = req.url.split("?shortcode=")[1];
   const shortcode = shortcodeMatch !== null ? shortcodeMatch : null;
 
-  console.log(shortcode);
   try {
     const urlEntry = await prisma.shortenedURL.findUnique({
       where: { short_code: shortcode as string },
@@ -46,8 +40,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const urlEntryPrivate = await prisma.shortenedURLPrivate.findUnique({
       where: { short_code: shortcode as string },
     });
-    console.log("urlEntry", urlEntry);
-    console.log("urlEntryPrivate", urlEntryPrivate);
 
     if (!urlEntry && !urlEntryPrivate) {
       return NextResponse.json(
@@ -67,7 +59,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
       long_url: responseData?.long_url,
     };
     const visit_detail = await visitorDetails(visitorData);
-    console.log("visit_detail", visit_detail);
 
     if (responseData) {
       return NextResponse.json({ url: responseData.long_url }, { status: 200 });
