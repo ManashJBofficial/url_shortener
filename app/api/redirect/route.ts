@@ -50,15 +50,17 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
     const responseData = urlEntry || urlEntryPrivate;
 
-    const visitorData = {
-      ip: ip,
-      country: country,
-      browser: browser,
-      os: os,
-      short_code: shortcode,
-      long_url: responseData?.long_url,
-    };
-    const visit_detail = await visitorDetails(visitorData);
+    if (urlEntryPrivate) {
+      const visitorData = {
+        ip: ip,
+        country: country,
+        browser: browser,
+        os: os,
+        short_code: shortcode,
+        long_url: responseData?.long_url,
+      };
+      const visit_detail = await visitorDetails(visitorData);
+    }
 
     if (responseData) {
       return NextResponse.json({ url: responseData.long_url }, { status: 200 });
@@ -69,7 +71,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
       );
     }
   } catch (error) {
-    console.error("Error fetching URL:", error);
     return NextResponse.json({ error: "Failed to fetch URL" }, { status: 500 });
   }
 };
