@@ -21,6 +21,7 @@ import UrlCard from "./components/UrlCard";
 import { Tooltip } from "@nextui-org/react";
 import { copyTextToClipboard } from "../lib/utils/CopyToClipboard";
 import NavBarComponent from "./components/NavBarComponent";
+import SkeletonComponent from "./components/SkeletonComponent";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -63,8 +64,8 @@ const Page = () => {
         </div>
         <FormInput />
         <Toaster />
-        <div className="">
-          {publicLinks &&
+        <div>
+          {publicLinks && publicLinks.length > 0 ? (
             [...publicLinks]
               .reverse()
               .slice(0, 3)
@@ -77,7 +78,13 @@ const Page = () => {
                     drop={false}
                   />
                 </span>
-              ))}
+              ))
+          ) : (
+            <div className="flex flex-col gap-3">
+              <SkeletonComponent />
+              <SkeletonComponent />
+            </div>
+          )}
         </div>
       </div>
     </div>
