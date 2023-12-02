@@ -109,7 +109,6 @@
 .pagination__disable {
   display: none;
 }
-
 /* Define the responsive width class */
 .responsive-width {
   width: 100%; /* This sets the width to 100% for smaller screens */
@@ -123,5 +122,9 @@
 
   @media (min-width: 1024px) {
     width: 45rem; /* Further adjust the width for larger screens */
+  }
+
+  @media (max-width: 421px) {
+    width: 23rem; /* Further adjust the width for smaller screens */
   }
 }
