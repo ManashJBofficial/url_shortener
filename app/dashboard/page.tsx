@@ -70,21 +70,21 @@ const Dashboard = () => {
     }
   };
 
-  const renderPagination = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <span
-          key={i}
-          className={page === i ? "pagination__selected" : ""}
-          onClick={() => handlePageChange(i)}
-        >
-          {i}
-        </span>
-      );
-    }
-    return pages;
-  };
+  // const renderPagination = () => {
+  //   const pages = [];
+  //   for (let i = 1; i <= totalPages; i++) {
+  //     pages.push(
+  //       <span
+  //         key={i}
+  //         className={page === i ? "pagination__selected" : ""}
+  //         onClick={() => handlePageChange(i)}
+  //       >
+  //         {i}
+  //       </span>
+  //     );
+  //   }
+  //   return pages;
+  // };
 
   return (
     <>
@@ -118,12 +118,11 @@ const Dashboard = () => {
                 )
                 .map((e, index) => {
                   return (
-                    <div key={`${e.id}-${index}`} className="mb-4 ">
+                    <div key={`${e.id}-${index}`} className="mb-4">
                       <UrlCard
                         data={e}
                         width="responsive-width"
-                        visibility="block"
-                        // dropdown="block"
+                        visibility="hidden"
                         drop={true}
                       />
                     </div>
