@@ -1,3 +1,11 @@
+/**
+ * Deletes a shortened URL from the database.
+ *
+ * First deletes any visitor details records associated with the short code.
+ * Then deletes the ShortenedURLPrivate record with the matching short code.
+ *
+ * @param shortCode - The short code of the shortened URL to delete.
+ */
 "use server";
 import prisma from "../../lib/db";
 

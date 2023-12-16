@@ -1,3 +1,7 @@
+/**
+ * StoreProvider component provides the Redux store to child components.
+ * It wraps the children in a React Redux <Provider> with the store.
+ */
 "use client";
 import store from "./store";
 import { Provider } from "react-redux";

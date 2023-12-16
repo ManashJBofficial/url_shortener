@@ -1,3 +1,16 @@
+/**
+ * UrlCard component renders a card displaying information about a shortened URL.
+ *
+ * Props:
+ * - data: Object containing info about the shortened URL (id, long_url, short_code, etc)
+ * - width: String to set width CSS class on card
+ * - visibility: String to set visibility CSS class on image
+ * - drop: Boolean to determine if dropdown menu is displayed
+ *
+ * Component shows URL info, copy button, and conditionally dropdown menu.
+ * Handles click to copy short URL to clipboard.
+ * Conditionally opens VisitorModal and DeleteConfirm modals.
+ */
 import React, { useState } from "react";
 
 import {

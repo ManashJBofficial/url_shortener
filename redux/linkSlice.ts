@@ -1,3 +1,9 @@
+/**
+ * Redux slice for managing links state.
+ *
+ * Defines the links slice with name, initial state, and reducers.
+ * Exports the generated reducer and action creators.
+ */
 import { createSlice } from "@reduxjs/toolkit";
 
 type LinkType = {

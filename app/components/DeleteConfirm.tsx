@@ -1,3 +1,15 @@
+/**
+ * DeleteConfirm component displays a confirmation modal
+ * before deleting a short URL.
+ *
+ * It takes in the onDelete handler to close the modal,
+ * and the URL data to delete.
+ *
+ * On delete button click, it calls the deleteLink async function,
+ * dispatches the delete action to update redux state,
+ * shows a toast notification of success,
+ * and closes the modal.
+ */
 import React from "react";
 import {
   Modal,

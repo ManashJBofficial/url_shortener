@@ -1,3 +1,11 @@
+/**
+ * POST handler for /api/user/route.ts.
+ *
+ * This endpoint handles user creation. It takes the user info from the request body,
+ * creates a new user record in the database via Prisma, and returns a 201 response
+ * if successful. If the method is not POST, it returns a 405. If there is an error
+ * inserting the user, it returns a 500 with an error message.
+ */
 import prisma from "../../../lib/db";
 import { NextResponse } from "next/server";
 

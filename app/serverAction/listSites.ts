@@ -1,3 +1,9 @@
+/**
+ * Fetches a paginated list of shortened URL records for the authenticated user from the database.
+ *
+ * Accepts the user ID, page number, and page size. Queries the database with pagination.
+ * Returns the list of records and total count.
+ */
 "use server";
 import prisma from "../../lib/db";
 

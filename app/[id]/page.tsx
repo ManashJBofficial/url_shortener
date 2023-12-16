@@ -1,3 +1,12 @@
+/**
+ * Page component fetches redirect URL for shortcode from API
+ * and redirects browser to target URL.
+ *
+ * Uses useState and useEffect hooks to manage state.
+ * Fetches data from API on mount.
+ * Redirects on successful API response.
+ * Renders error message on API failure.
+ */
 "use client";
 
 import { useEffect, useState } from "react";

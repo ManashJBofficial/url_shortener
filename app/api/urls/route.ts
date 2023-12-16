@@ -1,3 +1,18 @@
+/**
+ * GET handler for retrieving all public shortened URLs.
+ *
+ * Imports prisma client and Next.js server utilities.
+ *
+ * Checks request method is GET, returns 405 error if not.
+ *
+ * Calls prisma to findMany() shortened URLs.
+ *
+ * Returns 404 error if no URLs found.
+ *
+ * Returns 200 OK with found URLs.
+ *
+ * Logs and returns 500 error on any exceptions.
+ */
 import prisma from "../../../lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
