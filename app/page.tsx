@@ -1,3 +1,14 @@
+/**
+ * Page component renders the main UI of the application.
+ *
+ * It displays the app header, url shortener form,
+ * list of recently shortened urls, and auth status.
+ *
+ * Fetches previously shortened urls from localStorage
+ * and dispatches them to Redux store on mount.
+ *
+ * Renders skeleton UI if no urls exist yet.
+ */
 "use client";
 
 import Image from "next/image";

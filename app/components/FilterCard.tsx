@@ -1,3 +1,13 @@
+/**
+ * FilterCard component renders a card with an input to filter links.
+ *
+ * Props:
+ * - filterValue: string - The current filter value state
+ * - setFilterValue: Dispatch<SetStateAction<string>> - Setter to update filter value state
+ *
+ * Contains handlers to update filterValue on input change and clear.
+ * Renders a NextUI Card, Input, and custom SearchIcon.
+ */
 import React, { useState } from "react";
 
 import {

@@ -1,3 +1,7 @@
+/**
+ * Handles POST request to /api/shorten-private endpoint. Validates user is authenticated,
+ * generates a short code for the long URL, saves to DB, and returns the shortened URL data.
+ */
 import prisma from "../../../lib/db";
 import { NextResponse } from "next/server";
 import { generateRandomString } from "../../../lib/utils/RandomString";

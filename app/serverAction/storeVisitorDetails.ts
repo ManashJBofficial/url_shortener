@@ -1,3 +1,13 @@
+/**
+ * Stores visitor details for a given short URL visit in the database.
+ *
+ * Checks if a record already exists for the IP and short code.
+ * If it does, updates the visit count if the browser/device match,
+ * or creates a new record if they differ.
+ * If no existing record, creates a new visitor details record.
+ *
+ * Exported to allow access from the server route.
+ */
 import prisma from "../../lib/db";
 
 const visitorDetails = async (visitor_data: any) => {

@@ -1,3 +1,14 @@
+/**
+ * publicLinkSlice.ts defines a Redux slice for managing public links state.
+ *
+ * It exports the publicLinkSlice reducer, as well as the setPublicLinks and addPublicLinks
+ * action creators used to update the state.
+ *
+ * The state contains an array of PublicLinkType objects representing individual public links.
+ * PublicLinkType defines the schema for a public link, containing id, urls, userId, and timestamp.
+ *
+ * The reducers allow replacing the entire publicLinks array, or pushing a new link.
+ */
 import { createSlice } from "@reduxjs/toolkit";
 
 type PublicLinkType = {

@@ -1,3 +1,9 @@
+/**
+ * Provides NextUI styling context to the application.
+ *
+ * Wraps the app in a NextUIProvider component to enable
+ * using NextUI components.
+ */
 // app/providers.tsx
 "use client";
 

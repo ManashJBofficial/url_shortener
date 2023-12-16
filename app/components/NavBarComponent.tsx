@@ -1,3 +1,14 @@
+/**
+ * NavBarComponent renders the navigation bar for the application.
+ *
+ * It displays the app logo, login/dashboard buttons, and a user dropdown menu.
+ *
+ * The component uses React hooks like useState and useEffect to manage state.
+ *
+ * It takes in signOut and session props to control user login state.
+ *
+ * Overall it handles navigation and user session display in the header.
+ */
 "use client";
 import React, { useEffect, useState } from "react";
 

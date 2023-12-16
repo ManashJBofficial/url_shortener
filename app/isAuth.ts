@@ -1,3 +1,12 @@
+/**
+ * Checks if the user is authenticated and returns
+ * a success or unauthorized response.
+ *
+ * Checks for an active session using getServerSession()
+ * and returns a 401 unauthorized response if no session exists.
+ *
+ * Otherwise, returns a 200 success response.
+ */
 "use server";
 
 import { getServerSession } from "next-auth/next";

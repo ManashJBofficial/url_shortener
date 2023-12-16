@@ -1,3 +1,7 @@
+/**
+ * Fetches visitor details for a given short URL code from the database.
+ * Aggregates the data to return visit count, common locations, devices and browsers.
+ */
 "use server";
 import prisma from "../../lib/db";
 

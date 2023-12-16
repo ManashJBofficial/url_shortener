@@ -1,3 +1,7 @@
+/**
+ * SkeletonComponent renders a skeleton UI with Card and Skeleton components from NextUI.
+ * It shows a loading state before data is available.
+ */
 import React from "react";
 import { Card, Skeleton, Button } from "@nextui-org/react";
 

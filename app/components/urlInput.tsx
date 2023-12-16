@@ -1,3 +1,12 @@
+/**
+ * UrlInput component.
+ *
+ * Renders an input field to enter a URL and a button.
+ * Clicking the button shows an alert.
+ *
+ * Props:
+ * - None
+ */
 "use client";
 
 import React from "react";

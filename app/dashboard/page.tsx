@@ -1,3 +1,10 @@
+/**
+ * Dashboard page component.
+ *
+ * Handles user session and authentication.
+ * Fetches and displays list of links for authenticated user.
+ * Allows filtering and pagination of links list.
+ */
 "use client";
 import NavBarComponent from "../components/NavBarComponent";
 import React, { useCallback, useEffect, useState } from "react";
@@ -86,6 +93,16 @@ const Dashboard = () => {
   //   return pages;
   // };
 
+  /**
+   * Renders the main dashboard page.
+   *
+   * Includes the navbar, "My Links" header, modal form,
+   * filter card, list of URL cards, pagination, etc.
+   *
+   * Fetches and displays paginated links data for the logged in user.
+   * Handles filtering links client-side by search term.
+   * Updates pagination when page number changes.
+   */
   return (
     <>
       <div className="flex items-center justify-evenly ">

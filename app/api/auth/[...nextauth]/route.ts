@@ -1,3 +1,15 @@
+/**
+ * NextAuth handler for authentication using Google and GitHub providers.
+ *
+ * Configures NextAuth with Google and GitHub providers using client IDs
+ * and secrets from environment variables.
+ *
+ * The signIn callback checks if the user exists in the database.
+ * If not, it makes an API call to /api/user to create the user,
+ * passing profile data from Google/GitHub.
+ *
+ * Exports the configured NextAuth handler.
+ */
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";

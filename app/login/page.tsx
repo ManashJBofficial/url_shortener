@@ -1,3 +1,9 @@
+/**
+ * Login page component.
+ *
+ * Renders login options if user is not authenticated.
+ * Redirects to /dashboard if user is already authenticated.
+ */
 "use client";
 import { useSession, signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";

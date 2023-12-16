@@ -1,3 +1,14 @@
+/**
+ * GET handler for redirecting short URLs.
+ *
+ * Fetches IP and browser info from client.
+ * Looks up shortcode in DB.
+ * If found, redirects to associated long URL.
+ * If not found, returns 404.
+ *
+ * Stores visit details in DB if private shortcode.
+ * Handles errors and returns appropriate status codes.
+ */
 import prisma from "../../../lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";

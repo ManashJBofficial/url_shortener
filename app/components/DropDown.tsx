@@ -1,3 +1,9 @@
+/**
+ * DropDown component renders a dropdown menu with "View Details"
+ * and "Delete Link" options. It takes two callback props -
+ * onOpen and onDeleteOpen - which are invoked when the respective
+ * menu items are clicked.
+ */
 import React from "react";
 
 import {

@@ -1,3 +1,13 @@
+/**
+ * ModalForm component renders a modal dialog with a form
+ * for creating a new shortened link.
+ *
+ * It uses React hooks and NextUI components to implement the modal,
+ * and contains a FormInput component to handle submitting the form.
+ *
+ * When opened, it displays a modal dialog with a header, divider,
+ * body containing the form, and triggers onClose when the form is submitted.
+ */
 import React, { useCallback } from "react";
 
 import {
